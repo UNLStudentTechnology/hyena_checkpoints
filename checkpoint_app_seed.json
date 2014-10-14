@@ -1,0 +1,25 @@
+{
+	"checkpoints" : [
+		{
+			"created_at": "2014-10-07T22:06:33.813Z",
+			"title" : "Big Red Welcome",
+			"group_id" : 1,
+			"checkins" : [
+				{
+					"created_at" : "2014-10-07T22:06:33.813Z",
+					"user" : {
+						"user_id" : "1",
+						"uni_auth" : "hgascoigne2"
+					}
+				}
+			]
+		},
+		{
+			"created_at": "2014-10-07T22:06:33.813Z",
+			"title" : "BEAT Northwestern",
+			"group_id" : 1,
+			"checkins" : {
+			}
+		}
+	]
+}

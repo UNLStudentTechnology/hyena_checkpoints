@@ -1,0 +1,27 @@
+{
+  "name": "hyena_checkpoints",
+  "version": "0.0.1",
+  "authors": [
+    "Hayden Gascoigne <haydengascoigne@gmail.com>"
+  ],
+  "description": "Checkpoint application for the Hyena Platform",
+  "keywords": [
+    "unl",
+    "hyena",
+    "platform",
+    "checkpoints",
+    "student",
+    "technology"
+  ],
+  "license": "MIT",
+  "homepage": "http://yourtech.unl.edu",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ]
+}

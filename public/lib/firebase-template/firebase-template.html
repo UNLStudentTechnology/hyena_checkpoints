@@ -1,0 +1,16 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../firebase-element/firebase-element.html">
+
+<polymer-element name="firebase-template" attributes="data">
+  <template>
+    <firebase-element id="base" location="{{data}}" data="{{response}}" keys="{{keys}}"></firebase-element>
+    <template repeat="{{key in keys}}">
+      <p>{{response[key].user.uni_auth}}</p>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      data: ""
+    });
+  </script>
+</polymer-element>
