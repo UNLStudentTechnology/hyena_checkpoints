@@ -461,7 +461,6 @@ code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}
 pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}
 q{quotes:"\201C" "\201D" "\2018" "\2019"}
 sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
-sup{top:-.5em}
 sub{bottom:-.25em}
 img{border:0}
 svg:not(:root){overflow:hidden}
@@ -772,4 +771,19 @@ aside,small{font-size:1rem}
 core-toolbar{background:#d00000;box-shadow:none;color:#fff;font-size:1.8rem}
 core-drawer-panel:not([narrow]) core-toolbar #navigation-toggle{display:none}
 core-header-panel{box-shadow:none}
-body{background:#fff}
+unl-toolbar{background:#d00000;border:solid #9d0000;border-width:0 0 1px;box-sizing:border-box;color:#fff;display:block;height:55px;line-height:1;padding:8px;width:100%}
+unl-toolbar h1{font-size:3rem;line-height:1;padding:4px 0}
+unl-toolbar img{max-height:100%}
+unl-toolbar /deep/ span{display:block;padding:11px 0}
+unl-toolbar .center-content{text-align:center}
+unl-layout{box-shadow:0 0 3px rgba(0,0,0,.2);height:100%}
+unl-layout [drawer],unl-layout [main]{height:100%}
+unl-layout [drawer]{background:#fff}
+unl-layout [drawer] #drawer-content{border-right:1px solid #e7e8ea;height:100%}
+unl-layout [main]{background:#fff}
+unl-layout [main] #main-content{height:100%;padding-top:0}
+unl-layout [main] unl-toolbar:first-child{background:#fff;border-bottom:1px solid #e7e8ea;color:#595855}
+unl-user-profile{display:block;height:38px}
+unl-user-profile /deep/ img{border-radius:50%;height:38px;margin-left:8px}
+body{background:#fefdfa}
+sup{font-size:60%;top:-1.2rem}

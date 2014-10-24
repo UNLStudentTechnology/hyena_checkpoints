@@ -1,0 +1,39 @@
+{
+  "name": "akyral-dialog",
+  "version": "1.1.0",
+  "authors": [
+    "Filipe Araujo <filipe.alves.araujo@gmail.com>"
+  ],
+  "description": "A responsive dialog/modal element built on Polymer",
+  "keywords": [
+    "akyral",
+    "layout",
+    "drawer",
+    "polymer",
+    "web-components"
+  ],
+  "main": "akyral-dialog.html",
+  "license": "MIT",
+  "homepage": "https://github.com/filaraujo/akyral-dialog/",
+  "ignore": [
+    "**/.*",
+    "**/*.scss",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.4.0"
+  },
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "17ee026662888d613eff8a34e0cea347586a1657"
+  },
+  "_source": "git://github.com/filaraujo/akyral-dialog.git",
+  "_target": "~1.1.0",
+  "_originalSource": "akyral-dialog"
+}

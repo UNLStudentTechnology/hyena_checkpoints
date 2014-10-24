@@ -12,58 +12,43 @@
 
 	<!-- Polymer -->
 	<link rel="import" href="public/lib/polymer/polymer.html">
-	<link rel="import" href="public/lib/unl-style/unl-style.html">
-	<link rel="import" href="public/lib/core-drawer-panel/core-drawer-panel.html">
-	<link rel="import" href="public/lib/core-header-panel/core-header-panel.html">
-	<link rel="import" href="public/lib/core-toolbar/core-toolbar.html">
-	<link rel="import" href="public/lib/core-icon-button/core-icon-button.html">
-	<link rel="import" href="public/lib/core-menu/core-menu.html">
-	<link rel="import" href="public/lib/core-item/core-item.html">
-	<link rel="import" href="public/lib/core-list/core-list.html">
 	<link rel="import" href="public/lib/firebase-element/firebase-element.html">
+	<link rel="import" href="public/lib/akyral-dialog/akyral-dialog.html">
+	<link rel="import" href="public/lib/core-input/core-input.html">
+	<!-- Polymer UNL Components -->
+	<link rel="import" href="public/lib/unl-style/unl-style.html">
+	<link rel="import" href="public/lib/unl-layout/unl-layout.html">
+	<link rel="import" href="public/lib/unl-button/unl-button.html">
+	<link rel="import" href="public/lib/unl-toolbar/unl-toolbar.html">
+	<link rel="import" href="public/lib/unl-icon-button/unl-icon-button.html">
+	<link rel="import" href="public/lib/unl-user-profile/unl-user-profile.html">
+	<!-- End UNL Components -->
 </head>
 <body unresolved>
-<core-drawer-panel>
-	<core-header-panel drawer>
-		<core-toolbar>
-			Checkpoints
-		</core-toolbar>
-		<div> Drawer content... </div>
-	</core-header-panel>
-	<core-header-panel main>
-		<core-toolbar>
-			<core-icon-button id="navigation-toggle" icon="menu" on-tap="{{togglePanel}}"></core-icon-button>
-			Main
-		</core-toolbar>
-		<div id="main-content">
-		  	<template id="root" is="auto-binding">
-				<firebase-element id="base" location="https://amber-heat-9947.firebaseio.com/checkpoints/" data="{{data}}" keys="{{keys}}"></firebase-element>
-				<ul class="item-list">
-					<template repeat="{{key in keys}}">
-						<li class="item">
-							<h4>{{data[key].title}}</h4>
-							<ul>
-								<template repeat="{{checkin in data[key].checkins}}">
-									<li>{{checkin}}</li>
-								</template>
-							</ul>
-						</li>
-					</template>
-				</ul>
-			</template>
-		</div>
-	</core-header-panel>
-	<script>
-		Polymer({
-			/**
-		      * Toggle the drawer panel
-		      * @method togglePanel
-		      */    
-		    togglePanel: function(event) {
-		      this.$.drawerPanel.togglePanel();
-		    },
-	    });
-	</script>
-</core-drawer-panel>
+<akyral-dialog type="flip">
+	<h1>Hello</h1>
+</akyral-dialog>
+<unl-layout horizontal layout>
+    <div drawer parallax>
+        <unl-toolbar>
+        	<h1>Checkpoints<sup>Beta</sup></h1>
+        </unl-toolbar>
+        <div id="drawer-content">
+        	<h3>Menu</h3>
+        </div>
+    </div>
+    <div main>
+        <unl-toolbar horizontal layout>
+        	<unl-icon-button icon="menu" on-tap="{{toggleDrawer}}"></unl-icon-button>
+        	<div id="title" class="center-content" flex>
+        		<span>Home</span>
+        	</div>
+        	<unl-user-profile end></unl-user-profile>
+        </unl-toolbar>
+        <div id="main-content">
+        	<p>Hey, Kelsey, what can we help you with?</p>
+        </div>
+    </div>
+</unl-layout>
 </body>
 </html>

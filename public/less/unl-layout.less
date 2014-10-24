@@ -1,0 +1,32 @@
+unl-layout {
+	box-shadow: 0px 0px 3px fade(#000, 20%);
+	height: 100%;
+
+	& [main],
+	& [drawer] {
+		height: 100%;
+	}
+
+	& [drawer]  {
+		background: #fff;
+		& #drawer-content {
+			border-right: 1px solid @subtle;
+			height: 100%;
+		}
+	}
+
+	& [main] {
+		background: #fff;
+
+		& #main-content {
+			height: 100%;
+			padding-top: 0;
+		}
+
+		& unl-toolbar:first-child {
+			background: #fff;
+			border-bottom: 1px solid @subtle;
+			color: @primaryTextColor;
+		}
+	}
+}

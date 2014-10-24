@@ -16,7 +16,7 @@ Website URL: http://unl-hyena.herokuapp.com
 // LESS VARIABLES (Others can be found inside of other modules)
 // =========
 
-@backgroundColor: 	#ffffff;
+@backgroundColor: 	#FEFDFA;
 @primaryTextColor: 	#595855;
 @brand:			 	#D00000;
 @tertiary:			#137CBD;
@@ -47,10 +47,19 @@ Website URL: http://unl-hyena.herokuapp.com
 @import "nprogress";
 @import "core-toolbar";
 @import "core-header-panel";
+@import "unl-button";
+@import "unl-toolbar";
+@import "unl-layout";
+@import "unl-user-profile";
 
 
 // GENERAL CSS RULES
 // =========================
 body {
 	background: @backgroundColor;
+}
+
+sup {
+	font-size: 60%;
+	top: -1.2rem;
 }
