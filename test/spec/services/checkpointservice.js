@@ -11,8 +11,4 @@ describe('Service: CheckpointService', function () {
     CheckpointService = _CheckpointService_;
   }));
 
-  it('should do something', function () {
-    expect(!!CheckpointService).toBe(true);
-  });
-
 });

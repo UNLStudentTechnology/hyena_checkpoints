@@ -1,72 +1,76 @@
-<!doctype html>
-<html class="no-js">
+<!DOCTYPE html>
+<html class="no-js" ng-app="hyenaCheckpointsApp">
   <head>
     <meta charset="utf-8">
     <title>Checkpoints</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <base href="/">
 
+    <!-- build:js(.) scripts/webcomponents.js -->
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:html(.) hrml/components.html -->
     <!-- Polymer Imports -->
+    <link rel="import" href="bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
     <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
     <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <!-- UNL Components -->
+    <link rel="import" href="bower_components/unl-style/unl-style.html">
+    <link rel="import" href="bower_components/unl-header/unl-header.html">
+    <link rel="import" href="bower_components/unl-layout/unl-layout.html">
+    <link rel="import" href="bower_components/unl-toolbar/unl-toolbar.html">
+    <link rel="import" href="bower_components/unl-list-group/unl-list-group.html">
+    <link rel="import" href="bower_components/unl-list-item/unl-list-item.html">
+    <link rel="import" href="bower_components/unl-list-item-label/unl-list-item-label.html">
+    <link rel="import" href="bower_components/unl-list-item-user/unl-list-item-user.html">
+    <link rel="import" href="bower_components/unl-list-item-splitter/unl-list-item-splitter.html">
+    <link rel="import" href="bower_components/unl-icon-button/unl-icon-button.html">
+    <link rel="import" href="bower_components/unl-ncard-input/unl-ncard-input.html">
+    <!-- endbuild -->
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="hyenaCheckpointsApp">
+  <body ng-controller="ApplicationCtrl" unresolved>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <ul class="nav nav-pills pull-right">
-          
-        </ul>
-      </div>
-    </nav>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Checkpoints <sup>Beta</sup></a>
+    <!-- <unl-header></unl-header> -->
+    <unl-layout>
+      <div drawer flex vertical layout>
+        <unl-toolbar id="brand-toolbar">
+           <span flex>University of Nebraska-Lincoln</span>
+        </unl-toolbar>
+        <div id="drawer-content" flex>
+          <unl-list-group>
+            <unl-list-item-user user='{{currentUser}}'></unl-list-item-user>
+            <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logoutCurrentUser()"></a></unl-list-item-label>
+            <unl-list-item-splitter label="Groups"></unl-list-item-splitter>
+            <unl-list-item-label ng-repeat="(id, group) in currentUser.groups | orderBy:title" heading="{{group.title}}" link><a ng-href="#" ng-click="logoutCurrentUser()"></a></unl-list-item-label>
+          </unl-list-group>
         </div>
+      </div>
+      <div main>
+        <div ng-view=""></div>
+        </div>
+      </div>
+    </unl-layout>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a ng-href="#">Dashboard</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">Apps <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="">Checkpoints</a></li>
-                <li><a href="">QNA</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
 
-    <div class="container">
-      <div ng-view=""></div>
-    </div>
+
+    <!-- <div ng-view="" fit></div>
+    </div> -->
+    
     <!-- End application content -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -98,13 +102,11 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/platform/platform.js"></script>
-    <script src="bower_components/polymer/polymer.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
     <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -112,7 +114,13 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/dashboard.js"></script>
         <script src="scripts/controllers/checkpoint.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/application.js"></script>
         <script src="scripts/services/CheckpointService.js"></script>
+        <script src="scripts/services/UserService.js"></script>
+        <script src="scripts/services/Session.js"></script>
+        <script src="scripts/services/AuthService.js"></script>
+        <script src="scripts/services/AuthInterceptor.js"></script>
         <!-- endbuild -->
 </body>
 </html>

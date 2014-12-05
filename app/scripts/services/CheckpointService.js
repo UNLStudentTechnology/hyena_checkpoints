@@ -10,7 +10,7 @@
  */
 angular.module('hyenaCheckpointsApp')
 	.service('CheckpointService', function CheckpointService(FBURL, $firebase) {
-		var checkpointsRef = new Firebase(FBURL).child('checkpoints');
+		var checkpointsRef = new Firebase(FBURL).child('groups/1/checkpoints');
 
 		return {
 			get: function getCheckpoint(checkpointId) {
@@ -21,6 +21,9 @@ angular.module('hyenaCheckpointsApp')
 			},
 			add: function addCheckpoint(checkpoint) {
 				return $firebase(checkpointsRef).$push(checkpoint);
+			},
+			checkin: function checkinUser(checkpointId, checkin) {
+				return $firebase(checkpointsRef.child(checkpointId).child('checkins')).$push(checkin);
 			}
 		};
 	});

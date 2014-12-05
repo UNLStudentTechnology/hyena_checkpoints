@@ -9,12 +9,16 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('DashboardCtrl', function ($scope, CheckpointService) {
+  .controller('DashboardCtrl', function ($rootScope, $scope, CheckpointService) {
 
+    //Load a list of checkpoints
   	$scope.checkpoints = null;
     var checkpoints = CheckpointService.sync(10);
-	checkpoints.$bindTo($scope, 'checkpoints');
+	  checkpoints.$bindTo($scope, 'checkpoints');
 
+    /**
+     * Add a new checkpoint to the database
+     */
     $scope.addCheckpoint = function() {
     	var checkpoint = {
     		title 		: $scope.checkpointTitle,

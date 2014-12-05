@@ -1,10 +1,15 @@
-<div class="page-header">
-  <h1>{{checkpoint.title}}</h1>
+<unl-toolbar horizontal layout>
+	<unl-icon-button id="drawer-toggle" class="hidden-lg" icon="menu"></unl-icon-button>
+	<a ng-href="/" title="Back to Main"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
+  	<span flex class="align-center">{{checkpoint.title}}</span>
+</unl-toolbar>
+<div class="content-container">
+	<form ng-submit="checkinUser()">
+		<input ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncard-input" value="" placeholder="Enter your NUID" pattern="[0-9]*" autofocus>
+	</form>
 </div>
-<h3>Checkins</h3>
-<ul class="list-group">
-  <li class="list-group-item" ng-repeat="(id, checkin) in checkpoint.checkins">
-  	{{ checkin.user.uni_auth }}
-  	{{ moment("12-25-1995", "MM-DD-YYYY") }}
-  </li>
-</ul>
+<div class="content-container">
+	<unl-list-group>
+		<unl-list-item-label heading="{{ checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm a' }}" ng-repeat="(id, checkin) in checkpoint.checkins | orderBy:-user"></unl-list-item-label>
+	</unl-list-group>
+</div>

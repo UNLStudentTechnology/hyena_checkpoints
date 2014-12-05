@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Checkpoint', function () {
+describe('Service: Auth', function () {
 
   // load the service's module
   beforeEach(module('hyenaCheckpointsApp'));
 
   // instantiate service
-  var Checkpoint;
-  beforeEach(inject(function (_Checkpoint_) {
-    Checkpoint = _Checkpoint_;
+  var Auth;
+  beforeEach(inject(function (_Auth_) {
+    Auth = _Auth_;
   }));
 
   it('should do something', function () {
-    expect(!!Checkpoint).toBe(true);
+    expect(!!Auth).toBe(true);
   });
 
 });

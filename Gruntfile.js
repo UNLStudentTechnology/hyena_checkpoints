@@ -21,6 +21,8 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+  var modRewrite = require('connect-modrewrite');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -69,19 +71,31 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35729,
+        middleware: function (connect) {
+            return [
+                modRewrite(['^[^\\.]*$ /index.html [L]']),
+                connect.static('.tmp'),
+                connect().use(
+                    '/bower_components',
+                    connect.static('./bower_components')
+                ),
+                connect.static(appConfig.app)
+            ];
+        }
       },
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
+                modRewrite(['^[^\\.]*$ /index.html [L]']),
+                connect.static('.tmp'),
+                connect().use(
+                    '/bower_components',
+                    connect.static('./bower_components')
+                ),
+                connect.static(appConfig.app)
             ];
           }
         }
@@ -108,6 +122,21 @@ module.exports = function (grunt) {
           base: '<%= yeoman.dist %>'
         }
       }
+    },
+
+    // Compile LESS files
+    less: {
+        development: {
+            options: {
+                compress: true,
+                yuicompress: true,
+                optimization: 2
+            },
+            files: {
+                // target.css file: source.less file
+                'app/styles/unl-style.css': 'app/styles/less/main.less'
+            }
+        }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes

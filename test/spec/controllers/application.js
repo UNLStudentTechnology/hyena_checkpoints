@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: AboutCtrl', function () {
+describe('Controller: ApplicationCtrl', function () {
 
   // load the controller's module
   beforeEach(module('hyenaCheckpointsApp'));
 
-  var AboutCtrl,
+  var ApplicationCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AboutCtrl = $controller('AboutCtrl', {
+    ApplicationCtrl = $controller('ApplicationCtrl', {
       $scope: scope
     });
   }));

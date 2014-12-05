@@ -1,0 +1,67 @@
+// =============
+// MAIN CSS FILE
+// =============
+// VERSION: 1.0
+// ============
+
+// Part of an effort to create a modular, lightweight CSS framework.
+
+/*
+Title: UNL CSS Framework
+Website CSS Version: 4.1
+Website URL: http://unl-hyena.herokuapp.com
+*/
+
+
+// LESS VARIABLES (Others can be found inside of other modules)
+// =========
+
+@backgroundColor: 	#FEFDFA;
+@primaryTextColor: 	#595855;
+@brand:			 	#D00000;
+@tertiary:			#137CBD;
+@muted:				#a0a1a3;
+@subtle:			#E7E8EA;
+
+@cream:				#FFFFFF; //#FEFDFA
+@dark:				#595855;
+@darkAlt:			#454542;
+
+@error:				#CC0000;
+@success:			#2ECC71;
+@warning: 			#F1C40F;
+@info:				#137CBD;
+
+@borderRadius:		3px;
+@headerHeight:		55px;
+
+
+// SELECTED MODULES
+// ================
+// If you don't want to use a certain feature, just comment it out. Hooray for lightweight stylesheets!
+
+@import "normalize"; //Probably shouldn't remove this one.
+@import "helper";
+@import "type";
+@import "grid";
+@import "nprogress";
+@import "core-toolbar";
+@import "core-header-panel";
+@import "unl-button";
+@import "unl-toolbar";
+@import "unl-layout";
+@import "unl-user-profile";
+@import "unl-progress";
+
+
+// GENERAL CSS RULES
+// =========================
+body {
+	background: @backgroundColor;
+}
+
+sup {
+	font-size: 50%;
+	margin-left: 1px;
+	top: -1.3rem;
+}
