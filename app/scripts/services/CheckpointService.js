@@ -9,21 +9,26 @@
  * Service in the hyenaCheckpointsApp.
  */
 angular.module('hyenaCheckpointsApp')
-	.service('CheckpointService', function CheckpointService(FBURL, $firebase) {
-		var checkpointsRef = new Firebase(FBURL).child('groups/1/checkpoints');
+	.service('CheckpointService', function (FBURL, $firebase) {
+		var checkpointsRef = new Firebase(FBURL);
 
-		return {
-			get: function getCheckpoint(checkpointId) {
-				return $firebase(checkpointsRef.child(checkpointId)).$asObject();
+		var CheckpointService = {
+			groupFirebaseRef: function groupFirebaseRef(groupId) {
+				return checkpointsRef.child('groups/'+groupId+'/checkpoints');
 			},
-			sync: function sync(limit) {
-				return $firebase(checkpointsRef.limit(limit)).$asObject();
+			get: function getCheckpoint(groupId, checkpointId) {
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId)).$asObject();
 			},
-			add: function addCheckpoint(checkpoint) {
-				return $firebase(checkpointsRef).$push(checkpoint);
+			sync: function sync(groupId, limit) {
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).limit(limit)).$asObject();
 			},
-			checkin: function checkinUser(checkpointId, checkin) {
-				return $firebase(checkpointsRef.child(checkpointId).child('checkins')).$push(checkin);
+			add: function addCheckpoint(groupId, checkpoint) {
+				return $firebase(CheckpointService.groupFirebaseRef(groupId)).$push(checkpoint);
+			},
+			checkin: function checkinUser(checkpoint, checkin) {
+				return $firebase(CheckpointService.groupFirebaseRef(checkpoint.group_id).child(checkpoint.$id+'/checkins')).$push(checkin);
 			}
 		};
+
+		return CheckpointService;
 	});

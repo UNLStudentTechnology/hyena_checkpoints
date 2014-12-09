@@ -10,12 +10,20 @@
  */
 angular.module('hyenaCheckpointsApp')
   .controller('CheckpointCtrl', function ($scope, $http, $routeParams, CheckpointService, UserService, APIPATH) {
+  	//Declare variables
   	var checkpointId = $routeParams.checkpointId;
     $scope.checkpoint = null;
+  	var groupId = $routeParams.groupId;
+  	$scope.group = groupId;
+  	//End declare variables
 
-    var checkpoint = CheckpointService.get(checkpointId);
+    var checkpoint = CheckpointService.get(groupId, checkpointId);
 	checkpoint.$bindTo($scope, 'checkpoint');
 
+	/**
+	 * Checks in a user to a particular checkpoint
+	 * @return bool
+	 */
 	$scope.checkinUser = function() {
 		console.log('Checkin...', $scope.checkinNcard);
 
@@ -31,7 +39,7 @@ angular.module('hyenaCheckpointsApp')
 	    	};
 
 	    	//Do the checkin
-	    	var checkinPromise = CheckpointService.checkin(checkpointId, checkin);
+	    	var checkinPromise = CheckpointService.checkin($scope.checkpoint, checkin);
 	    	checkinPromise.then(function() {
 	    		$scope.checkinNcard = '';
 	    	});

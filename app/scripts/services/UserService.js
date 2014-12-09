@@ -9,7 +9,7 @@
  * Service in the hyenaCheckpointsApp.
  */
 angular.module('hyenaCheckpointsApp')
-	.service('UserService', function UserService(APIPATH, APIKEY, $http) {
+	.service('UserService', function (APIPATH, APIKEY, $http) {
 		return {
 			get: function getUser(userId, scope) {
 				if(typeof scope === 'undefined')

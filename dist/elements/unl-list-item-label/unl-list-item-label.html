@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Created by Hayden Gascoigne
+-->
+
+<polymer-element name="unl-list-item-label" attributes="heading label link">
+  <template>
+    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}}">     
+        <div class="heading">{{heading}}</div>
+        <template if="{{label}}">
+          <div class="label">{{label}}</div>
+        </template>
+        <content></content>
+    </li>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      polyfill-next-selector { content: ':host > a'; }
+      ::content > a{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* IE10 styling to ensure link is clickable. Cannot be completely
+        transparent or minifiers change it to `transparent` which does not work. */
+        background-color: rgba(0, 0, 0, 0.000001);
+      }
+    </style>
+  </template>
+  <script>
+      (function(){
+        Polymer('unl-list-item-label', {
+          link: false
+        });
+      }());
+    </script>
+</polymer-element>

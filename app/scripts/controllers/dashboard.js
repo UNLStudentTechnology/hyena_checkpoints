@@ -9,11 +9,13 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('DashboardCtrl', function ($rootScope, $scope, CheckpointService) {
+  .controller('DashboardCtrl', function ($rootScope, $scope, $routeParams, CheckpointService) {
+    var groupId = $routeParams.groupId;
+    $scope.group = groupId;
 
     //Load a list of checkpoints
   	$scope.checkpoints = null;
-    var checkpoints = CheckpointService.sync(10);
+    var checkpoints = CheckpointService.sync(groupId, 10);
 	  checkpoints.$bindTo($scope, 'checkpoints');
 
     /**
@@ -26,7 +28,7 @@ angular.module('hyenaCheckpointsApp')
     		created_at	: moment().format()
     	};
 
-    	var promise = CheckpointService.add(checkpoint);
+    	var promise = CheckpointService.add($scope.group, checkpoint);
     	promise.then(function() {
     		$scope.checkpointTitle = '';
     	});

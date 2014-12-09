@@ -64,4 +64,8 @@ angular.module('hyenaCheckpointsApp')
       }
     };
 
+    $scope.toggleMainDrawer = function() {
+      document.querySelector('unl-layout').toggleDrawer();
+    };
+
   });

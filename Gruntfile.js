@@ -60,7 +60,8 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.app %>/elements/{,*/}*.{html,css}',
         ]
       }
     },
@@ -80,6 +81,10 @@ module.exports = function (grunt) {
                     '/bower_components',
                     connect.static('./bower_components')
                 ),
+                connect().use(
+                  '/elements',
+                    connect.static('./elements')
+                ),
                 connect.static(appConfig.app)
             ];
         }
@@ -94,6 +99,10 @@ module.exports = function (grunt) {
                 connect().use(
                     '/bower_components',
                     connect.static('./bower_components')
+                ),
+                connect().use(
+                  '/elements',
+                    connect.static('./elements')
                 ),
                 connect.static(appConfig.app)
             ];
@@ -110,6 +119,10 @@ module.exports = function (grunt) {
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
+              ),
+              connect().use(
+                '/elements',
+                  connect.static('./elements')
               ),
               connect.static(appConfig.app)
             ];
@@ -337,13 +350,18 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
           ]
         }, {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true, 
+          cwd: './',
+          dest: '<%= yeoman.dist %>',
+          src: ['elements/**', '!**/node_modules/**'], 
         }]
       },
       styles: {

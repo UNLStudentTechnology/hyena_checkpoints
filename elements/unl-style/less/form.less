@@ -1,0 +1,20 @@
+body /deep/ input,
+body /deep/ textarea {
+	border: 1px solid @subtle;
+	box-sizing: border-box;
+	font-size: @baseFontSize;
+	outline: none;
+	padding: @lineHeight/2;
+	position: relative;
+	width: 100%;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    .transition(.2s ease-in-out border-color);
+
+    &:focus {
+    	border-color: @brand;
+    	outline: none;
+
+    	.transition(.2s ease-in-out border-color);
+    }
+}

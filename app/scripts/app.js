@@ -25,10 +25,14 @@ angular
         templateUrl: 'views/main.html',
         controller: 'DashboardCtrl'
       })
+      .when('/:groupId', {
+        templateUrl: 'views/main.html',
+        controller: 'DashboardCtrl'
+      })
       .when('/login', {
         controller: 'LoginCtrl'
       })
-      .when('/checkpoint/:checkpointId', {
+      .when('/:groupId/checkpoint/:checkpointId', {
         templateUrl: 'views/checkpoint.html',
         controller: 'CheckpointCtrl'
       })
