@@ -24,7 +24,7 @@ angular.module('hyenaCheckpointsApp')
     $scope.addCheckpoint = function() {
     	var checkpoint = {
     		title 		: $scope.checkpointTitle,
-    		group_id 	: 1,
+    		group_id 	: $scope.group,
     		created_at	: moment().format()
     	};
 

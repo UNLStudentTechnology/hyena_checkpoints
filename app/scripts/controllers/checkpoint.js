@@ -42,8 +42,12 @@ angular.module('hyenaCheckpointsApp')
 
 	    	//Do the checkin
 	    	var checkinPromise = CheckpointService.checkin($scope.checkpoint, checkin);
-	    	checkinPromise.then(function() {
+	    	checkinPromise.then(function(response) {
+	    		console.log('Checkin Response', response);
 	    		$scope.checkinNcard = '';
+	    	}, function(error) {
+	    		//Unable to validate, log the error
+	    		console.log('Checkin error', error);
 	    	});
     	}, function(error) {
     		//Unable to validate, log the error
