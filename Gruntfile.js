@@ -361,7 +361,7 @@ module.exports = function (grunt) {
           expand: true, 
           cwd: './',
           dest: '<%= yeoman.dist %>',
-          src: ['elements/**', '!**/node_modules/**'], 
+          src: ['elements/**', '!**/node_modules/**', '!**/bower_components/**'], 
         }]
       },
       styles: {
