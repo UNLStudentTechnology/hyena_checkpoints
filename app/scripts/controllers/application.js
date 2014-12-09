@@ -8,7 +8,7 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, AuthService, UserService, Session, AUTH_EVENTS, USER_ROLES) {
+  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, AuthService, UserService, Session, AUTH_EVENTS, USER_ROLES) {
     //Initialize some variables
     $scope.currentUser = null;
   	$scope.userRoles = USER_ROLES;
@@ -67,5 +67,7 @@ angular.module('hyenaCheckpointsApp')
     $scope.toggleMainDrawer = function() {
       document.querySelector('unl-layout').toggleDrawer();
     };
+
+    
 
   });
