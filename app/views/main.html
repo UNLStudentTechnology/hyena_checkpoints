@@ -7,7 +7,7 @@
     <unl-list-item-label ng-repeat="(id, checkpoint) in checkpoints | orderBy:checkpoint.title" heading="{{ checkpoint.title }}" link>
       <a ng-href="/{{group}}/checkpoint/{{id}}"></a>
     </unl-list-item-label>
-    <unl-list-item>
+    <unl-list-item ng-show="group">
       <form ng-submit="addCheckpoint()" horizontal layout>
         <input is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpoint-title" ng-model="checkpointTitle" flex ten>
         <button flex>Add</button>

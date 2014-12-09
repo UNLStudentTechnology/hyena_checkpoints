@@ -17,6 +17,8 @@ angular.module('hyenaCheckpointsApp')
   	$scope.group = groupId;
   	//End declare variables
 
+  	console.log('Group ID', groupId);
+
     var checkpoint = CheckpointService.get(groupId, checkpointId);
 	checkpoint.$bindTo($scope, 'checkpoint');
 
