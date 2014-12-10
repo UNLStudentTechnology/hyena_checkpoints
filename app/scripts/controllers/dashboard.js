@@ -12,7 +12,7 @@ angular.module('hyenaCheckpointsApp')
   .controller('DashboardCtrl', function ($rootScope, $scope, $routeParams, CheckpointService, Notification) {
     //Get the selected group from the route parameters and set it in the scope
     var groupId = $routeParams.groupId;
-    $scope.group = groupId;
+    $scope.groupId = groupId;
 
     //Load a list of checkpoints
   	$scope.checkpoints = null;
@@ -28,7 +28,7 @@ angular.module('hyenaCheckpointsApp')
     		created_at	: moment().format()
     	};
 
-    	var promise = CheckpointService.add($scope.group, checkpoint);
+    	var promise = CheckpointService.add($scope.groupId, checkpoint);
     	promise.then(function() {
     		$scope.checkpointTitle = '';
         //Show notification

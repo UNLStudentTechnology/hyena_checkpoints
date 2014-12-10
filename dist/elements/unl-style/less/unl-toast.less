@@ -8,20 +8,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 unl-toast {
-  display: inline-block;
   background: @dark;
-  color: #fff;
-  min-height: 48px;
-  min-width: 288px;
-  padding: 16px 24px 12px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-shadow: 0 2px 5px 0 fade(#000, 25%);
   border-radius: @borderRadius;
   bottom: 12px;
-  left: 12px;
-  font-size: 14px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 5px 0 fade(#000, 25%);
+  color: #fff;
   cursor: default;
+  display: inline-block;
+  left: 12px;
+  min-height: 48px;
+  min-width: 288px;
+  padding: @lineHeight/2 20px;
+  -moz-box-sizing: border-box;
 
   &.error {
     background: @error;

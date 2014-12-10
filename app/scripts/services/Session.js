@@ -5,7 +5,7 @@
  * @name hyenaCheckpointsApp.Session
  * @description
  * # Session
- * Service in the hyenaCheckpointsApp.
+ * Manages interaction with HTML5 sessionStorage and the authentication session.
  */
 angular.module('hyenaCheckpointsApp')
   .service('Session', function Session() {

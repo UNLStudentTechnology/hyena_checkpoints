@@ -17,8 +17,6 @@ angular.module('hyenaCheckpointsApp')
   	$scope.group = groupId;
   	//End declare variables
 
-  	console.log('Group ID', groupId);
-
     var checkpoint = CheckpointService.get(groupId, checkpointId);
 	checkpoint.$bindTo($scope, 'checkpoint');
 
@@ -44,6 +42,7 @@ angular.module('hyenaCheckpointsApp')
 	    	var checkinPromise = CheckpointService.checkin($scope.group, $scope.checkpoint.$id, checkin);
 	    	checkinPromise.then(function(response) {
 	    		$scope.checkinNcard = '';
+	    		Notification.show('Thanks! You have been checked in!', 'success');
 	    	}, function(error) {
 	    		//Unable to validate, log the error
 	    		console.log('Checkin error', error);

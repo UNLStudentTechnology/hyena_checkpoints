@@ -19,10 +19,12 @@ angular.module('hyenaCheckpointsApp')
     //AUTHENTICATION FLOW
     if(typeof $location.search().user !== 'undefined') //If this is new log in from CAS
     {
-      auth_user = UserService.get($location.search().user, 'groups');
-      auth_user.then(function(user) {
-          $scope.currentUser = user.data;
-          Session.createAuthSession(user.data.uni_auth);
+      var authUser = $location.search().user;
+      $location.url($location.path()); //remove query param from address bar
+      AuthService.manualLogin(authUser).then(function(user) {
+        $scope.currentUser = user.data;
+      }, function(error) {
+        console.log('Login Error', error);
       });
     }
     else if(AuthService.check()) //Already authenticated, attempt to get existing session
@@ -33,7 +35,7 @@ angular.module('hyenaCheckpointsApp')
     }
     else
     {
-      AuthService.login();
+      AuthService.login(); //Start the CAS flow
     }
 
     
@@ -64,10 +66,12 @@ angular.module('hyenaCheckpointsApp')
       }
     };
 
+    /**
+     * [toggleMainDrawer description]
+     * @return {[type]} [description]
+     */
     $scope.toggleMainDrawer = function() {
       document.querySelector('unl-layout').toggleDrawer();
     };
-
-    
 
   });
