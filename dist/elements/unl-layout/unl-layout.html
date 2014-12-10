@@ -92,11 +92,11 @@ Example:
     <template>
         <link rel="stylesheet" href="unl-layout.css" />
 
-        <div id="drawer" open?="{{isDrawerOpen}}" hidden?="{{hideDrawer}}" vertical layout>
+        <div id="drawer" open?="{{isDrawerOpen}}" hidden?="{{hideDrawer}}" vertical layout role="navigation">
             <content select="[drawer]" id="drawerContent"></content>
         </div>
 
-        <div id="main">
+        <div id="main" role="main">
             <div id="overlay" on-tap="{{closeDrawer}}"></div>
             <content select="[main]"></content>
         </div>
