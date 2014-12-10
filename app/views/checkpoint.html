@@ -9,7 +9,8 @@
 		<button>Check In</button>
 	</form>
 </div>
-<div class="content-container">
+<div class="content-container" flex>
+	<unl-empty-content ng-hide="checkpoint.checkins" text="No checkins yet"></unl-empty-content>
 	<unl-list-group ng-show="checkpoint.checkins">
 		<unl-list-item-splitter label="Past Checkins"></unl-list-item-splitter>
 		<unl-list-item-label heading="{{ checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm a' }}" ng-repeat="(id, checkin) in checkpoint.checkins | orderBy:-user"></unl-list-item-label>

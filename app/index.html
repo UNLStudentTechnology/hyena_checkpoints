@@ -30,6 +30,7 @@
     <link rel="import" href="elements/unl-icon-button/unl-icon-button.html">
     <link rel="import" href="elements/unl-ncard-input/unl-ncard-input.html">
     <link rel="import" href="elements/unl-toast/unl-toast.html">
+    <link rel="import" href="elements/unl-empty-content/unl-empty-content.html">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -62,7 +63,7 @@
             <!-- End authenticated user options -->
             <!-- List groups -->
             <unl-list-item-splitter label="Groups"></unl-list-item-splitter>
-            <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:title" heading="{{group.title}}" link><a ng-href="/{{group.id}}"></a></unl-list-item-label>
+            <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:title" heading="{{group.title}}" link><a ng-href="/{{group.id}}" ng-click="toggleMainDrawer()"></a></unl-list-item-label>
             <!-- End list groups -->
             </div>
           </unl-list-group>
