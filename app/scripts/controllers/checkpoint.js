@@ -9,7 +9,7 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('CheckpointCtrl', function ($scope, $http, $routeParams, CheckpointService, UserService, APIPATH) {
+  .controller('CheckpointCtrl', function ($scope, $http, $routeParams, CheckpointService, UserService, Notification, APIPATH) {
   	//Declare variables
   	var checkpointId = $routeParams.checkpointId;
     $scope.checkpoint = null;
@@ -34,24 +34,25 @@ angular.module('hyenaCheckpointsApp')
     	var validation = UserService.validate($scope.checkinNcard);
     	validation.then(function(user) {
     		//Was valid, create a new checkin
-    		var bb_username = user.data[0];
+    		var bb_username = user.data.users_validated[0];
 	    	var checkin = {
 	    		user 		: bb_username,
 	    		created_at	: moment().format()
 	    	};
 
 	    	//Do the checkin
-	    	var checkinPromise = CheckpointService.checkin($scope.checkpoint, checkin);
+	    	var checkinPromise = CheckpointService.checkin($scope.group, $scope.checkpoint.$id, checkin);
 	    	checkinPromise.then(function(response) {
-	    		console.log('Checkin Response', response);
 	    		$scope.checkinNcard = '';
 	    	}, function(error) {
 	    		//Unable to validate, log the error
 	    		console.log('Checkin error', error);
+	    		Notification.show(error.data, 'error');
 	    	});
     	}, function(error) {
     		//Unable to validate, log the error
     		console.log(error);
+    		Notification.show(error.data, 'error');
     	});
     };
 

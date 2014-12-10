@@ -86,26 +86,18 @@ Fired when the `paper-toast` has completely closed.
 <link rel="import" href="../core-transition/core-transition-css.html">
 <link rel="import" href="../core-media-query/core-media-query.html">
 
-<polymer-element name="paper-toast" attributes="text duration opened responsiveWidth swipeDisabled autoCloseDisabled" role="status">
+<polymer-element name="unl-toast" attributes="text duration opened responsiveWidth swipeDisabled autoCloseDisabled type" role="status">
 
 <template>
-
-  <link rel="stylesheet" href="paper-toast.css" >
-
   <core-overlay id="overlay" autoFocusDisabled autoCloseDisabled="{{autoCloseDisabled}}" opened="{{opened}}" target="{{}}" transition="core-transition-bottom"></core-overlay>
 
   <div class="toast-container" horizontal layout>
-
     <div class="toast-text" flex>{{text}}</div>
-    
     <div class="toast-text toast-action" on-tap="{{dismiss}}">
       <content></content>
     </div>
-
   </div>
-  
   <core-media-query query="max-width: {{responsiveWidth}}" queryMatches="{{narrowMode}}"></core-media-query>
-
 </template>
 <script>
 
@@ -113,7 +105,9 @@ Fired when the `paper-toast` has completely closed.
   
     var currentToast;
   
-    Polymer('paper-toast', {
+    Polymer('unl-toast', {
+
+      type: '',
   
       /**
        * The text shows in a toast.
@@ -179,6 +173,12 @@ Fired when the `paper-toast` has completely closed.
         track: 'track',
         trackend: 'trackEnd',
         transitionend: 'transitionEnd'
+      },
+
+      typeChanged: function() {
+        var cl = this.classList;
+        cl.remove('success', 'info', 'warning', 'error');
+        cl.add(this.type);
       },
       
       narrowModeChanged: function() {

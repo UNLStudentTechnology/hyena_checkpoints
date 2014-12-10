@@ -29,6 +29,7 @@
     <link rel="import" href="elements/unl-list-item-splitter/unl-list-item-splitter.html">
     <link rel="import" href="elements/unl-icon-button/unl-icon-button.html">
     <link rel="import" href="elements/unl-ncard-input/unl-ncard-input.html">
+    <link rel="import" href="elements/unl-toast/unl-toast.html">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -48,7 +49,7 @@
     <!-- <unl-header></unl-header> -->
     <unl-layout fit>
       <div drawer flex vertical layout>
-        <unl-toolbar id="brand-toolbar">
+        <unl-toolbar id="brand-toolbar" role="banner">
            <span flex>University of Nebraska-Lincoln</span>
         </unl-toolbar>
         <div id="drawer-content" flex>
@@ -72,7 +73,7 @@
         </div>
       </div>
     </unl-layout>
-
+    <unl-toast text=""></unl-toast>
 
 
     <!-- <div ng-view="" fit></div>
@@ -128,6 +129,7 @@
         <script src="scripts/services/Session.js"></script>
         <script src="scripts/services/AuthService.js"></script>
         <script src="scripts/services/AuthInterceptor.js"></script>
+        <script src="scripts/services/Notification.js"></script>
         <!-- endbuild -->
 </body>
 </html>
