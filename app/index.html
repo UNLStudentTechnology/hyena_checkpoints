@@ -45,27 +45,25 @@
 
     <!-- Add your site or application content here -->
     <!-- <unl-header></unl-header> -->
-    <unl-layout fit>
-      <div drawer flex vertical layout>
-        <div id="drawer-content" flex>
-          <unl-list-group>
-            <unl-list-item-user user='{{currentUser}}'></unl-list-item-user>
-            <div ng-show="currentUser">
-            <!-- Authenticated user options -->
-            <unl-list-item-splitter label="Options"></unl-list-item-splitter>
-            <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logoutCurrentUser()"></a></unl-list-item-label>
-            <!-- End authenticated user options -->
-            <!-- List groups -->
-            <unl-list-item-splitter label="Groups"></unl-list-item-splitter>
-            <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:title" heading="{{group.title}}" link><a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"></a></unl-list-item-label>
-            <!-- End list groups -->
-            </div>
-          </unl-list-group>
+    <unl-layout>
+        <div drawer flex vertical layout>
+            <unl-list-group>
+                <unl-list-item-user user='{{currentUser}}'></unl-list-item-user>
+                <div ng-show="currentUser">
+                <!-- Authenticated user options -->
+                <unl-list-item-splitter label="Options"></unl-list-item-splitter>
+                <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logoutCurrentUser()"></a></unl-list-item-label>
+                <!-- End authenticated user options -->
+                <!-- List groups -->
+                <unl-list-item-splitter label="Groups"></unl-list-item-splitter>
+                <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:title" heading="{{group.title}}" link><a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"></a></unl-list-item-label>
+                <!-- End list groups -->
+                </div>
+            </unl-list-group>
         </div>
-      </div>
-      <div main>
-        <div ng-view=""></div>
-      </div>
+        <div main>
+            <div ng-view=""></div>
+        </div>
     </unl-layout>
     <unl-toast text=""></unl-toast>
 

@@ -1,12 +1,12 @@
 <unl-toolbar horizontal layout>
 	<unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
-	<a ng-href="/{{group}}" title="Back to Checkpoints"><unl-icon-button icon="arrow-back">Checkpoints</unl-icon-button></a>
+	<a ng-href="/{{group}}" title="Back to Checkpoints"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
   	<span flex class="align-center">{{checkpoint.title}}</span>
 </unl-toolbar>
 <!-- Check in Form -->
 <div class="content-container">
 	<form ng-submit="checkinUser()" horizontal layout>
-		<input ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncard-input" value="" placeholder="Enter your NUID" pattern="[0-9]*" autofocus flex ten>
+		<input ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncard-input" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
 		<button>Check In</button>
 	</form>
 </div>
