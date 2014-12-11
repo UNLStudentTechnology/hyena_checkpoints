@@ -17,6 +17,7 @@ angular.module('hyenaCheckpointsApp')
   	$scope.group = groupId;
   	//End declare variables
 
+  	//Get checkpoints for the active group
     var checkpoint = CheckpointService.get(groupId, checkpointId);
 	checkpoint.$bindTo($scope, 'checkpoint');
 
@@ -25,7 +26,7 @@ angular.module('hyenaCheckpointsApp')
 	 * @return bool
 	 */
 	$scope.checkinUser = function() {
-		console.log('Checkin...', $scope.checkinNcard);
+		console.log('Checkining in ID...', $scope.checkinNcard);
 
 		//After submission, validate the NUID and return (if possible)
 		//the Blackboard Username associated with the NUID.

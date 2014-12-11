@@ -13,6 +13,7 @@ angular.module('hyenaCheckpointsApp')
     //Get the selected group from the route parameters and set it in the scope
     var groupId = $routeParams.groupId;
     $scope.groupId = groupId;
+    
 
     //Load a list of checkpoints
   	$scope.checkpoints = null;
