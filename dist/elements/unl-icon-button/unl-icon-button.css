@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   -webkit-user-select: none;
   border-radius: 2px;
   padding: 7px;
-  margin: 2px;
+  margin: 2px 2px 1px;
   vertical-align: middle;
   font-size: 1rem;
   cursor: pointer;

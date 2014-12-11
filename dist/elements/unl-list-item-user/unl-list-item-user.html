@@ -41,7 +41,10 @@ Created by Hayden Gascoigne
 
         userChanged: function() {
           try{
-            this.user = JSON.parse(this.user);
+            if(typeof this.user !== 'undefined')
+            {
+              this.user = JSON.parse(this.user);
+            }
           }
           catch(error)
           {

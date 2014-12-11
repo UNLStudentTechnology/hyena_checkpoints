@@ -1,4 +1,5 @@
-9<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../unl-toolbar/unl-toolbar.html">
 
 <!--
 A responsive ui element that creates an app-like structure containing a drawer. The `unl-layout`
@@ -93,6 +94,9 @@ Example:
         <link rel="stylesheet" href="unl-layout.css" />
 
         <div id="drawer" open?="{{isDrawerOpen}}" hidden?="{{hideDrawer}}" vertical layout role="navigation">
+            <unl-toolbar id="brand-toolbar" role="banner">
+               <span flex>University of Nebraska-Lincoln</span>
+            </unl-toolbar>
             <content select="[drawer]" id="drawerContent"></content>
         </div>
 

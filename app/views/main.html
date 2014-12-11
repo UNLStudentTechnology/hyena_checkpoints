@@ -1,7 +1,8 @@
 <unl-toolbar horizontal layout>
-  <unl-icon-button class="drawer-toggle visible-xs" icon="menu" ng-click="toggleMainDrawer()"></unl-icon-button>
+  <unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
   <span flex class="align-center">Checkpoints</span>
 </unl-toolbar>
+<!-- Checkpoints -->
 <div class="content-container">
   <unl-list-group>
     <unl-list-item-label ng-repeat="(id, checkpoint) in checkpoints | orderBy:checkpoint.title" heading="{{ checkpoint.title }}" link>
@@ -15,3 +16,4 @@
     </unl-list-item>
   </unl-list-group>
 </div>
+<!-- End Checkpoints -->

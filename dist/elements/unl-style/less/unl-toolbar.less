@@ -1,4 +1,5 @@
-unl-toolbar {
+unl-toolbar,
+body /deep/ unl-toolbar {
 	background-color: @brand;
 	border: solid darken(@brand, 10%);
 	border-width: 0 0 1px 0;
@@ -8,6 +9,7 @@ unl-toolbar {
 	height: 55px;
 	line-height: 1;
 	padding: 8px;
+	position: relative;
 	width: 100%;
 
 	h1 {
@@ -30,6 +32,11 @@ unl-toolbar {
 		padding: 11px 0;
 	}
 
+	& /deep/ unl-icon-button /deep/ span {
+		display: inline;
+		padding: 0;
+	}
+
 	& .center-content {
 		text-align: center;
 	}
@@ -42,5 +49,11 @@ unl-toolbar {
 		padding-left: 60px;
 		text-transform: uppercase;
 		.brand-font();
+	}
+
+	& unl-drawer-toggle {
+		border-right: 1px solid @subtle;
+		padding: 8px 8px 8px 0;
+		margin: -8px 0;
 	}
 }

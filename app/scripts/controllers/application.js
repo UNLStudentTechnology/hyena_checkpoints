@@ -8,15 +8,14 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, AuthService, UserService, Session, AUTH_EVENTS, USER_ROLES) {
+  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, AuthService, UserService, Session, AUTH_EVENTS, USER_ROLES) {
     //Initialize some variables
     $scope.currentUser = null;
   	$scope.userRoles = USER_ROLES;
   	$scope.isAuthorized = AuthService.isAuthorized;
 
-    var auth_user = null;
-
     //AUTHENTICATION FLOW
+    var auth_user = null;
     if(typeof $location.search().user !== 'undefined') //If this is new log in from CAS
     {
       var authUser = $location.search().user;
@@ -67,11 +66,17 @@ angular.module('hyenaCheckpointsApp')
     };
 
     /**
-     * [toggleMainDrawer description]
-     * @return {[type]} [description]
+     * Toggles the main layout drawer
      */
     $scope.toggleMainDrawer = function() {
       document.querySelector('unl-layout').toggleDrawer();
+    };
+
+    /**
+     * Toggles the main layout drawer
+     */
+    $scope.closeMainDrawer = function() {
+      document.querySelector('unl-layout').closeDrawer();
     };
 
   });
