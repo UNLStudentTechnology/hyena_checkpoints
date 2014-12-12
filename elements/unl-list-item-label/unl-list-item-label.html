@@ -6,12 +6,14 @@ Created by Hayden Gascoigne
 
 <polymer-element name="unl-list-item-label" attributes="heading label link">
   <template>
-    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}}">     
+    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}}" horizontal layout>  
+      <div flex>   
         <div class="heading">{{heading}}</div>
         <template if="{{label}}">
           <div class="label">{{label}}</div>
         </template>
-        <content></content>
+      </div>
+      <content></content>
     </li>
     <style>
       :host {

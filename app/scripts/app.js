@@ -69,12 +69,3 @@ angular
     editor: 'editor',
     guest: 'guest'
   });
-
-
-  //Setup layout drawer toggle
-  // var menu = document.querySelector('.unl-list-item');
-  // console.log(menu);
-  // menu.addEventListener('click', function() {
-  //   console.log('clicked');
-  //     document.querySelector('unl-layout').toggleDrawer();
-  // });

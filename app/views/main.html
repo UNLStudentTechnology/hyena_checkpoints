@@ -5,8 +5,11 @@
 <!-- Checkpoints -->
 <div class="content-container">
   <unl-list-group>
-    <unl-list-item-label ng-repeat="(id, checkpoint) in checkpoints | orderBy:checkpoint.title" heading="{{ checkpoint.title }}" link>
-      <a ng-href="/{{groupId}}/checkpoint/{{id}}"></a>
+    <unl-list-item-label ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
+      <a ng-href="/{{groupId}}/checkpoint/{{checkpoint.$id}}"></a>
+      <div class="tools">
+        <unl-icon-button icon="remove-circle-outline" ng-click="removeCheckpoint('{{checkpoint.$id}}')" class="color-error"></unl-icon-button>
+      </div>
     </unl-list-item-label>
     <unl-list-item ng-show="groupId">
       <form ng-submit="addCheckpoint()" horizontal layout>

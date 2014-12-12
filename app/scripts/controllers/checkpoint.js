@@ -26,7 +26,7 @@ angular.module('hyenaCheckpointsApp')
 	 * @return bool
 	 */
 	$scope.checkinUser = function() {
-		console.log('Checkining in ID...', $scope.checkinNcard);
+		console.log('Checking in ID...', $scope.checkinNcard);
 
 		//After submission, validate the NUID and return (if possible)
 		//the Blackboard Username associated with the NUID.

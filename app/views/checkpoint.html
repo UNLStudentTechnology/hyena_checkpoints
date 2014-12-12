@@ -1,6 +1,6 @@
 <unl-toolbar horizontal layout>
 	<unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
-	<a ng-href="/{{group}}" title="Back to Checkpoints"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
+	<a ng-href="/{{group}}" title="Back to Checkpoints"><unl-icon-button icon="arrow-back">Checkpoints</unl-icon-button></a>
   	<span flex class="align-center">{{checkpoint.title}}</span>
 </unl-toolbar>
 <!-- Check in Form -->
@@ -16,7 +16,7 @@
 	<unl-empty-content ng-hide="checkpoint.checkins" text="No checkins yet"></unl-empty-content>
 	<unl-list-group ng-show="checkpoint.checkins">
 		<unl-list-item-splitter label="Past Checkins"></unl-list-item-splitter>
-		<unl-list-item-label heading="{{ checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm a' }}" ng-repeat="(id, checkin) in checkpoint.checkins | orderBy:-user"></unl-list-item-label>
+		<unl-list-item-label heading="{{ checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkpoint.checkins | toArray | orderBy:'created_at':true"></unl-list-item-label>
 	</unl-list-group>
 </div>
 <!-- End Checkins -->

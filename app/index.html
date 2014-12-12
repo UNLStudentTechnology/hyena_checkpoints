@@ -61,7 +61,7 @@
                 <!-- End authenticated user options -->
                 <!-- List groups -->
                 <unl-list-item-splitter label="Groups"></unl-list-item-splitter>
-                <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:title" heading="{{group.title}}" link><a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"></a></unl-list-item-label>
+                <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link><a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"></a></unl-list-item-label>
                 <!-- End list groups -->
                 </div>
             </unl-list-group>
@@ -127,6 +127,8 @@
         <script src="scripts/services/AuthService.js"></script>
         <script src="scripts/services/AuthInterceptor.js"></script>
         <script src="scripts/services/Notification.js"></script>
+        <script src="scripts/filters/user.js"></script>
+        <script src="scripts/filters/toarray.js"></script>
         <!-- endbuild -->
 </body>
 </html>

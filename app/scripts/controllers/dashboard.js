@@ -13,12 +13,11 @@ angular.module('hyenaCheckpointsApp')
     //Get the selected group from the route parameters and set it in the scope
     var groupId = $routeParams.groupId;
     $scope.groupId = groupId;
-    
 
     //Load a list of checkpoints
   	$scope.checkpoints = null;
-    var checkpoints = CheckpointService.sync(groupId, 10);
-	  checkpoints.$bindTo($scope, 'checkpoints');
+    $scope.checkpoints = CheckpointService.sync(groupId, 10);
+	  //checkpoints.$bindTo($scope, 'checkpoints');
 
     /**
      * Add a new checkpoint to the database
@@ -35,7 +34,18 @@ angular.module('hyenaCheckpointsApp')
         //Show notification
         Notification.show('Your checkpoint has been added successfully!', 'success');
     	}, function(error) {
-        console.log('Add checkpoint error', error);
+        console.log('Add checkpoint error:', error);
+        Notification.show(error.message, 'error');
+      });
+    };
+
+    $scope.removeCheckpoint = function(checkpointId) {
+      var removePromise = CheckpointService.remove($scope.groupId, checkpointId);
+      removePromise.then(function() {
+        console.log('success');
+        Notification.show('Your checkpoint has been removed successfully!', 'success');
+      }, function(error) {
+        console.log('Remove checkpoint error:', error);
         Notification.show(error.message, 'error');
       });
     };
