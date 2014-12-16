@@ -14,7 +14,7 @@ angular.module('hyenaCheckpointsApp')
 
 		var GroupService = {
 			get: function getGroup(groupId, scope) {
-				if(typeof scope === 'undefined')
+				if(angular.isUndefined(scope))
 					scope = '';
 
 				return $http.get(

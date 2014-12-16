@@ -1,13 +1,20 @@
 unl-list-item-label {
 	& /deep/ .tools {
+		.layout-horizontal();
+		.layout-center();
 		position: relative;
 		z-index: 999;
 
 		& unl-icon-button {
+			height: 32px;
 			margin: -10px 0;
-			padding: 0px 4px 4px;
+			padding: 4px 4px;
 			position: relative;
-			top: -1px
+			top: 1px;
+		}
+
+		& span {
+			color: @muted;
 		}
 	}
 }

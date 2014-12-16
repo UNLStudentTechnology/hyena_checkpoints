@@ -1,7 +1,8 @@
-<unl-toolbar horizontal layout>
+<unl-toolbar>
 	<unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
 	<a ng-href="/{{group}}" title="Back to Checkpoints"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
   	<span flex class="align-center">{{checkpoint.title}}</span>
+  	<a ng-href="/{{group}}/checkpoint/{{checkpoint.$id}}/settings" title="Settings"><unl-icon-button icon="settings"></unl-icon-button></a>
 </unl-toolbar>
 <!-- Check in Form -->
 <div class="content-container">

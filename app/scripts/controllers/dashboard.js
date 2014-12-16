@@ -15,7 +15,7 @@ angular.module('hyenaCheckpointsApp')
     $scope.groupId = groupId;
 
     //Check and see if the group exists in the Firebase, if not, add it.
-    if(typeof groupId !== "undefined")
+    if(angular.isDefined(groupId))
       GroupService.existsOrAdd(groupId);
 
     
@@ -26,7 +26,7 @@ angular.module('hyenaCheckpointsApp')
     //console.log($scope.checkpoints);
 
     /**
-     * Add a new checkpoint to the database
+     * Add a new checkpoint to the Firebase
      */
     $scope.addCheckpoint = function() {
     	var checkpoint = {
@@ -34,6 +34,7 @@ angular.module('hyenaCheckpointsApp')
     		created_at	: moment().format()
     	};
 
+      //Add the checkpoint to Firebase
     	var promise = CheckpointService.add($scope.groupId, checkpoint);
     	promise.then(function() {
     		$scope.checkpointTitle = '';
@@ -45,6 +46,9 @@ angular.module('hyenaCheckpointsApp')
       });
     };
 
+    /**
+     * Removes a checkpoint from the Firebase
+     */
     $scope.removeCheckpoint = function(checkpointId) {
       var removePromise = CheckpointService.remove($scope.groupId, checkpointId);
       removePromise.then(function() {

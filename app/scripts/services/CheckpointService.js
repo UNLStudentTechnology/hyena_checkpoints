@@ -25,6 +25,9 @@ angular.module('hyenaCheckpointsApp')
 			add: function addCheckpoint(groupId, checkpoint) {
 				return $firebase(CheckpointService.groupFirebaseRef(groupId)).$push(checkpoint);
 			},
+			update: function updateCheckpoint(groupId, checkpointId, checkpoint) {
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId)).$update(checkpoint);
+			},
 			remove: function removeCheckpoint(groupId, checkpointId) {
 				return $firebase(CheckpointService.groupFirebaseRef(groupId)).$remove(checkpointId);
 			},

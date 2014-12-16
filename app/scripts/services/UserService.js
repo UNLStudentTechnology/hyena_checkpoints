@@ -18,7 +18,7 @@ angular.module('hyenaCheckpointsApp')
 			 * @return Promise
 			 */
 			get: function getUser(userId, scope) {
-				if(typeof scope === 'undefined')
+				if(angular.isUndefined(scope))
 					scope = '';
 
 				return $http.get(
@@ -43,11 +43,11 @@ angular.module('hyenaCheckpointsApp')
 			 */
 			getUserRelations: function getUserRelations(array, key) {
 				//If array is empty or malformed, end function
-				if(typeof array === 'undefined')
+				if(angular.isUndefined(array))
 					return false;
 
 				//Set default key
-				if(typeof key === 'undefined')
+				if(angular.isUndefined(key))
 					key = 'user';
 
 				array = toArrayFilter(array);

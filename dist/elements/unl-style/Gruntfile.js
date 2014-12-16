@@ -9,7 +9,8 @@ module.exports = function(grunt) {
         },
         files: {
           // target.css file: source.less file
-          "unl-style.css": "less/main.less"
+          "unl-style.css": "less/main.less",
+          "unl-style-fonts.css": "less/font-dist.less"
         }
       }
     },

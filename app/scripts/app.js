@@ -36,6 +36,10 @@ angular
         templateUrl: 'views/checkpoint.html',
         controller: 'CheckpointCtrl'
       })
+      .when('/:groupId/checkpoint/:checkpointId/settings', {
+        templateUrl: 'views/checkpoint_settings.html',
+        controller: 'CheckpointSettingsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
