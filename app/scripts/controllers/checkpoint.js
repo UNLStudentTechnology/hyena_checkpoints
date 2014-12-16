@@ -19,13 +19,11 @@ angular.module('hyenaCheckpointsApp')
 
   	//Get checkpoints for the active group
     var checkpoint = CheckpointService.get(groupId, checkpointId);
-    //checkpoint.$bindTo($scope, 'checkpoint');
-    $scope.checkpoint = checkpoint;
+    $scope.checkpoint = checkpoint; //checkpoint.$bindTo($scope, 'checkpoint');
 	checkpoint.$watch(function() {
 		//Transform the blackboard usernames into user objects
 		$scope.checkpoint.checkins = UserService.getUserRelations($scope.checkpoint.checkins); 
 	});
-
 
 	/**
 	 * Checks in a user to a particular checkpoint
