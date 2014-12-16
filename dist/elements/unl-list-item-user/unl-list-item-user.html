@@ -42,7 +42,7 @@ Created by Hayden Gascoigne
 
         userChanged: function() {
           try{
-            if(typeof this.user !== 'undefined')
+            if(typeof this.user !== 'undefined' && this.user != null)
             {
               this.user = JSON.parse(this.user);
             }

@@ -11,6 +11,12 @@
 angular.module('hyenaCheckpointsApp')
 	.service('UserService', function (APIPATH, APIKEY, $http, toArrayFilter) {
 		return {
+			/**
+			 * Gets a single user from the platform based on Blackboard user id.
+			 * @param  string userId Blackboard username
+			 * @param  string scope  Additional relations to return on the user
+			 * @return Promise
+			 */
 			get: function getUser(userId, scope) {
 				if(typeof scope === 'undefined')
 					scope = '';
