@@ -15,24 +15,28 @@ angular.module('hyenaCheckpointsApp')
     $scope.groupId = groupId;
 
     //Check and see if the group exists in the Firebase, if not, add it.
-    if(groupId && !GroupService.exists(groupId))
-    {
-      var groupCheckResponse = GroupService.get(groupId); //Get group information from platform
-      groupCheckResponse.then(function(response) {
-          //New Group Object
-          var newGroup = {
-            title: response.data.title,
-            description: response.data.description
-          };
-          //Add the group
-          GroupService.add(newGroup);
-      });
-    }
+    // console.log('Exists', GroupService.exists(groupId));
+    // if(!GroupService.exists(groupId))
+    // {
+    //   console.log('Group does not exist');
+    //   var groupCheckResponse = GroupService.get(groupId); //Get group information from platform
+    //   groupCheckResponse.then(function(response) {
+    //     console.log('Adding group');
+    //     //New Group Object
+    //     var newGroup = {
+    //       title: response.data.title,
+    //       description: response.data.description
+    //     };
+    //     //Add the group
+    //     GroupService.add(newGroup);
+    //   });
+    // }
     
     //Load a list of checkpoints
   	$scope.checkpoints = null;
     $scope.checkpoints = CheckpointService.sync(groupId, 10);
 	  //checkpoints.$bindTo($scope, 'checkpoints');
+    //console.log($scope.checkpoints);
 
     /**
      * Add a new checkpoint to the database

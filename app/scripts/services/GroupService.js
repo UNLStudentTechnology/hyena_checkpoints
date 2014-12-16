@@ -21,7 +21,7 @@ angular.module('hyenaCheckpointsApp')
 					APIPATH+'groups/'+groupId+'?with='+scope+'&api_key='+APIKEY);
 			},
 			exists: function exists(groupId) {
-				return !!$firebase(groupsRef.child(groupId)).$asObject();
+				return $firebase(groupsRef.child(groupId)).$asObject();
 			},
 			add: function add(group) {
 				return $firebase(groupsRef).$push(group);
