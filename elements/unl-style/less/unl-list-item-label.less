@@ -3,7 +3,7 @@ unl-list-item-label {
 		.layout-horizontal();
 		.layout-center();
 		position: relative;
-		z-index: 999;
+		z-index: 99;
 
 		& unl-icon-button {
 			height: 32px;
@@ -15,6 +15,15 @@ unl-list-item-label {
 
 		& span {
 			color: @muted;
+		}
+
+		@media (max-width: @breakpointPhone) {
+			max-width: 100%;
+			//width: 100%;
+
+			& input {
+				margin-top: 8px;
+			}
 		}
 	}
 }

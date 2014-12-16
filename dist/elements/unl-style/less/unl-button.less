@@ -1,9 +1,13 @@
 button {
-	background: @brand;
+	background-color: @tertiary;
 	border: none;
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
 	outline: none;
 	padding: @lineHeight/2;
+
+	&.button-brand {
+		background-color: @brand;
+	}
 }

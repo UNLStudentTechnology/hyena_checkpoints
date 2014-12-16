@@ -6,13 +6,13 @@ Created by Hayden Gascoigne
 
 <polymer-element name="unl-list-item-label" attributes="heading label link image">
   <template>
-    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}}" horizontal layout>  
+    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}}" horizontal layout wrap>  
       <template if="{{image}}">
       <div class="list-item-image rounded">
         <img src="https://s3.amazonaws.com/unlqna/uploads/user_images/{{image}}" alt="List Item Image"/>
       </div>
       </template>
-      <div flex>   
+      <div class="content" flex>   
         <div class="heading">{{heading}}</div>
         <template if="{{label}}">
           <div class="label">{{label}}</div>
