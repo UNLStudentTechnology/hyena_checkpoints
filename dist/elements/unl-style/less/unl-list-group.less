@@ -27,8 +27,8 @@ unl-list-group {
 
 		& .content {
 			margin-right: 8px;
-			width: 55%;
-			flex:1 0 auto;
+			width: 55%; //Should be min-width, but Safari is a POS and has a bug that doesn't render min-width correctly
+			flex:1 0 auto; //Shouldn't need this. See above comment.
 			-webkit-flex:1 0 auto;
 		}
 
