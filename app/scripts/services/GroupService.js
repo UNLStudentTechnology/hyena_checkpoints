@@ -29,6 +29,16 @@ angular.module('hyenaCheckpointsApp')
 			add: function add(group, groupId) {
 				return $firebase(groupsRef).$set(groupId, group);
 			},
+			addUser: function addUser(groupId, user) {
+				return $http.post(
+					APIPATH+'groups/'+groupId+'/users?api_key='+APIKEY, 
+					{ "users": [ user ] }
+				);
+			},
+			hasUser: function hasUser(groupId, userId) {
+				return $http.get(
+					APIPATH+'groups/'+groupId+'/users/'+userId+'?api_key='+APIKEY);
+			},
 			existsOrAdd: function existOrAdd(groupId) {
 				var groupExistsPromise = GroupService.exists(groupId);
 				groupExistsPromise.then(function(response) {
