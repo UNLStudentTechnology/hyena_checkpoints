@@ -23,15 +23,16 @@ angular.module('hyenaCheckpointsApp')
   	$scope.checkpoints = null;
     $scope.checkpoints = CheckpointService.sync(groupId, 10);
 	  //checkpoints.$bindTo($scope, 'checkpoints');
-    //console.log($scope.checkpoints);
+    console.log($scope.checkpoints);
 
     /**
      * Add a new checkpoint to the Firebase
      */
     $scope.addCheckpoint = function() {
     	var checkpoint = {
-    		title 		: $scope.checkpointTitle,
-    		created_at	: moment().format()
+    		title 		  : $scope.checkpointTitle,
+    		created_at	: moment().format(),
+        non_members : true
     	};
 
       //Add the checkpoint to Firebase
