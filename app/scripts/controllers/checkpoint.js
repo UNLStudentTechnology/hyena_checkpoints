@@ -90,7 +90,7 @@ angular.module('hyenaCheckpointsApp')
     	}, function(error) {
     		//Unable to validate, log the error
     		console.log('Checkin error', error);
-    		Notification.show(error.data, 'error');
+    		Notification.show('Sorry! You are already checked in!', 'error');
     	});
     }
 

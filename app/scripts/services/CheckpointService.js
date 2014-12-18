@@ -32,7 +32,7 @@ angular.module('hyenaCheckpointsApp')
 				return $firebase(CheckpointService.groupFirebaseRef(groupId)).$remove(checkpointId);
 			},
 			checkin: function checkinUser(groupId, checkpointId, checkin) {
-				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId+'/checkins')).$push(checkin);
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId+'/checkins')).$set(checkin.user, checkin);
 			}
 		};
 
