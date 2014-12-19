@@ -10,7 +10,7 @@
  */
 angular.module('hyenaCheckpointsApp')
   .service('AuthService', function ($http, Session, UserService, APIKEY, APIPATH, AppFirebase) {
-    var firebaseAuthRef = AppFirebase;
+    var firebaseAuthRef = AppFirebase.getRef();
 
     var AuthService = {
 
@@ -44,6 +44,7 @@ angular.module('hyenaCheckpointsApp')
        * @return Promise
        */
       logout: function() {
+        firebaseAuthRef.unauth();
         AuthService.expire();
         window.location.replace(APIPATH+'users/logout?api_key='+APIKEY);
       },
@@ -79,14 +80,6 @@ angular.module('hyenaCheckpointsApp')
       expire: function() {
         firebaseAuthRef.unauth();
         return !!Session.destroyAuthSession();
-      },
-     
-      isAuthorized: function(authorizedRoles) {
-        if (!angular.isArray(authorizedRoles)) {
-          authorizedRoles = [authorizedRoles];
-        }
-        return (AuthService.check() &&
-          authorizedRoles.indexOf(Session.userRole) !== -1);
       }
 
     };

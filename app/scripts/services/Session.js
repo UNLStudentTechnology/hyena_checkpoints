@@ -23,14 +23,6 @@ angular.module('hyenaCheckpointsApp')
 			return sessionStorage.removeItem(key);
 		},
 		createAuthSession: function(userId, authToken){
-			AppFirebase.authWithCustomToken(authToken, function(error, authData) {
-				if (error) {
-					console.log("Login Failed!", error);
-				} else {
-					console.log("Login Succeeded!", authData);
-				}
-			});
-
 			sessionStorage.setItem('auth', true);
 			sessionStorage.setItem('authUser', userId);
 			sessionStorage.setItem('authToken', authToken);

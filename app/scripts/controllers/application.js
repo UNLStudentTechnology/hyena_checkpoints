@@ -9,7 +9,7 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, Session, FBURL, AUTH_EVENTS) {
+  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, AppFirebase, Session, FBURL, AUTH_EVENTS) {
     //Initialize some variables
     $scope.currentUser = null;
 
@@ -18,14 +18,18 @@ angular.module('hyenaCheckpointsApp')
     if(typeof $location.search().user !== 'undefined') //If this is new log in from CAS
     {
       //Get Query Params
-      var authUser = $location.search().user;
       var authToken = $location.search().token;
       $location.url($location.path()); //Clear query params from address bar
-      //Process the user login
-      AuthService.manualLogin(authUser, authToken).then(function(user) {
-        $scope.currentUser = user.data;
+      //Evaluate Token
+      var tokenUser = AppFirebase.authenticate(authToken).then(function(authData) {
+        //Process the user login
+        AuthService.manualLogin(authData.uid, authToken).then(function(user) {
+          $scope.currentUser = user.data;
+        }, function(error) {
+          console.log('Login Error', error);
+        });
       }, function(error) {
-        console.log('Login Error', error);
+        console.error("Login failed:", error);
       });
     }
     else if(AuthService.check()) //Already authenticated, attempt to get existing session

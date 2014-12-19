@@ -9,7 +9,7 @@
  */
 angular.module('hyenaCheckpointsApp')
 	.service('CheckpointService', function ($firebase, Session, AppFirebase) {
-		var checkpointsRef = AppFirebase;
+		var checkpointsRef = AppFirebase.getRef();
 
 		var CheckpointService = {
 			groupFirebaseRef: function groupFirebaseRef(groupId) {
