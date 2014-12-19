@@ -20,7 +20,7 @@ angular.module('hyenaCheckpointsApp')
       //Get Query Params
       var authToken = $location.search().token;
       $location.url($location.path()); //Clear query params from address bar
-      //Evaluate Token
+      //Evaluate token from platform
       var tokenUser = AppFirebase.authenticate(authToken).then(function(authData) {
         //Process the user login
         AuthService.manualLogin(authData.uid, authToken).then(function(user) {
@@ -52,6 +52,17 @@ angular.module('hyenaCheckpointsApp')
       AuthService.expire();
       $scope.currentUser = null;
       AuthService.login();
+    });
+
+    /**
+     * Event handler for deauthorization from Firebase
+     */
+    AppFirebase.getAuthRef().$onAuth(function(authData) {
+      //console.log(authData);
+      if(!authData)
+      {
+        //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+      }
     });
 
     /**

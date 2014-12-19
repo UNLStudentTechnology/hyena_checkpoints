@@ -20,6 +20,11 @@ angular.module('hyenaCheckpointsApp')
       getRef: function getRef() {
         return appFirebase;
       },
+
+      getAuthRef: function getAuthRef() {
+        return $firebaseAuth(appFirebase);
+      },
+
       /**
        * Takes a JWT, decodes it, authenticates a user into a firebase, and returns the decoded token.
        * @param  JWT authToken  Secure JWT from authentication server. (Hyena Platform)
