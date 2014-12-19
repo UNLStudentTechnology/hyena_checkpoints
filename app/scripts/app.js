@@ -46,6 +46,7 @@ angular
     $locationProvider.html5Mode(true);
   })
   .config(function ($httpProvider) {
+    //$httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push([
       '$injector',
       function ($injector) {

@@ -1,3 +1,4 @@
+/* global Firebase */
 'use strict';
 
 /**
@@ -8,19 +9,20 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, AuthService, UserService, Session, AUTH_EVENTS, USER_ROLES) {
+  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, Session, FBURL, AUTH_EVENTS) {
     //Initialize some variables
     $scope.currentUser = null;
-  	$scope.userRoles = USER_ROLES;
-  	$scope.isAuthorized = AuthService.isAuthorized;
 
     //AUTHENTICATION FLOW
     var auth_user = null;
     if(typeof $location.search().user !== 'undefined') //If this is new log in from CAS
     {
+      //Get Query Params
       var authUser = $location.search().user;
-      $location.url($location.path()); //remove query param from address bar
-      AuthService.manualLogin(authUser).then(function(user) {
+      var authToken = $location.search().token;
+      $location.url($location.path()); //Clear query params from address bar
+      //Process the user login
+      AuthService.manualLogin(authUser, authToken).then(function(user) {
         $scope.currentUser = user.data;
       }, function(error) {
         console.log('Login Error', error);
@@ -36,12 +38,11 @@ angular.module('hyenaCheckpointsApp')
     {
       AuthService.login(); //Start the CAS flow
     }
-
+    //END AUTHENTICATION FLOW
     
     /**
      * Event handler for when a 401 error is returned from an API. This will
      * cause the current authenticated session to expire.
-     * @return {[type]} [description]
      */
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, function() {
       AuthService.expire();
@@ -57,12 +58,8 @@ angular.module('hyenaCheckpointsApp')
   		$scope.currentUser = user;
   	};
 
-    $scope.logoutCurrentUser = function() {
-      if(AuthService.logout())
-      {
-        $scope.currentUser = null;
-        AuthService.login();
-      }
+    $scope.logOutCurrentUser = function() {
+      AuthService.logout();
     };
 
     /**

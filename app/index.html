@@ -56,7 +56,7 @@
                 <div ng-show="currentUser">
                 <!-- Authenticated user options -->
                 <unl-list-item-header label="Options"></unl-list-item-header>
-                <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logoutCurrentUser()"></a></unl-list-item-label>
+                <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logOutCurrentUser()"></a></unl-list-item-label>
                 <!-- End authenticated user options -->
                 <!-- List groups -->
                 <unl-list-item-header label="Groups"></unl-list-item-header>
@@ -116,20 +116,21 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/factories/AppFirebase.js"></script>
         <script src="scripts/controllers/dashboard.js"></script>
         <script src="scripts/controllers/checkpoint.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/application.js"></script>
+        <script src="scripts/controllers/checkpointSettings.js"></script>
         <script src="scripts/services/CheckpointService.js"></script>
         <script src="scripts/services/UserService.js"></script>
         <script src="scripts/services/Session.js"></script>
         <script src="scripts/services/AuthService.js"></script>
         <script src="scripts/services/AuthInterceptor.js"></script>
         <script src="scripts/services/Notification.js"></script>
+        <script src="scripts/services/GroupService.js"></script>
         <script src="scripts/filters/user.js"></script>
         <script src="scripts/filters/toarray.js"></script>
-        <script src="scripts/services/GroupService.js"></script>
-        <script src="scripts/controllers/checkpointSettings.js"></script>
         <!-- endbuild -->
 </body>
 </html>

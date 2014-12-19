@@ -75,7 +75,8 @@ module.exports = function (grunt) {
         livereload: 35729,
         middleware: function (connect) {
             return [
-                modRewrite(['^[^\\.]*$ /index.html [L]']),
+                //modRewrite(['^[^\\.]*$ /index.html [L]']),
+                modRewrite (['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg$ /index.html [L]']),
                 connect.static('.tmp'),
                 connect().use(
                     '/bower_components',
@@ -94,7 +95,8 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-                modRewrite(['^[^\\.]*$ /index.html [L]']),
+                //modRewrite(['^[^\\.]*$ /index.html [L]']),
+                modRewrite (['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg$ /index.html [L]']),
                 connect.static('.tmp'),
                 connect().use(
                     '/bower_components',

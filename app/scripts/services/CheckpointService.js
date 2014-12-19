@@ -1,4 +1,3 @@
-/* global Firebase */
 'use strict';
 
 /**
@@ -9,8 +8,8 @@
  * Service in the hyenaCheckpointsApp.
  */
 angular.module('hyenaCheckpointsApp')
-	.service('CheckpointService', function (FBURL, $firebase) {
-		var checkpointsRef = new Firebase(FBURL);
+	.service('CheckpointService', function ($firebase, Session, AppFirebase) {
+		var checkpointsRef = AppFirebase;
 
 		var CheckpointService = {
 			groupFirebaseRef: function groupFirebaseRef(groupId) {

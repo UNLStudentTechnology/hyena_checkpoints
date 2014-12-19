@@ -9,7 +9,8 @@
  * REQUIRES the session and user service.
  */
 angular.module('hyenaCheckpointsApp')
-  .service('AuthService', function ($http, Session, UserService, APIKEY, APIPATH) {
+  .service('AuthService', function ($http, Session, UserService, APIKEY, APIPATH, AppFirebase) {
+    var firebaseAuthRef = AppFirebase;
 
     var AuthService = {
 
@@ -28,10 +29,10 @@ angular.module('hyenaCheckpointsApp')
        * @param  string userId Blackboard Username
        * @return Promise
        */
-      manualLogin: function(userId) {
+      manualLogin: function(userId, authToken) {
         var auth_user = UserService.get(userId, 'groups');
         return auth_user.then(function(user) {
-          if(Session.createAuthSession(userId))
+          if(Session.createAuthSession(userId, authToken))
             return AuthService.user();
           else
             return false;
@@ -43,11 +44,8 @@ angular.module('hyenaCheckpointsApp')
        * @return Promise
        */
       logout: function() {
-        return $http.get(APIPATH+'users/logout?api_key='+APIKEY)
-            .then(function(response) {
-              console.log('Logout Response', response);
-              AuthService.expire();
-            });
+        AuthService.expire();
+        window.location.replace(APIPATH+'users/logout?api_key='+APIKEY);
       },
 
       /**
@@ -79,6 +77,7 @@ angular.module('hyenaCheckpointsApp')
        * @return bool
        */
       expire: function() {
+        firebaseAuthRef.unauth();
         return !!Session.destroyAuthSession();
       },
      
