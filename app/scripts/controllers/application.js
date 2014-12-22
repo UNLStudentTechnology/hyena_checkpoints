@@ -9,7 +9,7 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, AppFirebase, Session, FBURL, AUTH_EVENTS) {
+  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, AppFirebase, Session, Notification, FBURL, AUTH_EVENTS) {
     //Initialize some variables
     $scope.currentUser = null;
 
@@ -41,8 +41,21 @@ angular.module('hyenaCheckpointsApp')
     else
     {
       AuthService.login(); //Start the CAS flow
+      Notification.showModal('Please log in', '#modal-content-login');
     }
     //END AUTHENTICATION FLOW
+
+    /** 
+     * Event handler for when the user logs in or out. Hides the page and shows a modal
+     * prompting the user to log in.
+     */
+    $scope.$watch('currentUser', function(newVal, oldVal) {
+      //console.log('currentUser', newVal, oldVal);
+      if(oldVal !== null && (angular.isUndefined(newVal) || newVal === null))
+        Notification.showModal('Please log in', '#modal-content-login');
+      else
+        Notification.hideModal();
+    });
     
     /**
      * Event handler for when a 401 error is returned from an API. This will
@@ -74,7 +87,16 @@ angular.module('hyenaCheckpointsApp')
   	};
 
     $scope.logOutCurrentUser = function() {
+      $scope.currentUser = null;
       AuthService.logout();
+    };
+
+    /**
+     * Starts the log in flow manually.
+     */
+    $scope.logIn = function() {
+      if(!AuthService.check())
+        AuthService.login();
     };
 
     /**
@@ -89,6 +111,17 @@ angular.module('hyenaCheckpointsApp')
      */
     $scope.closeMainDrawer = function() {
       document.querySelector('unl-layout').closeDrawer();
+    };
+
+    /**
+     * Callback function to show the login modal window.
+     */
+    $scope.showLoginWindow = function() {
+      Notification.setModalContent('#modal-content-login');
+    };
+
+    $scope.closeModal = function() {
+      Notification.hideModal();
     };
 
   });

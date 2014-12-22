@@ -88,7 +88,7 @@ attribute.
 Example:
 
     <akyral-modal type="slide" position="top" pinned="top"></akyral-modal>
-
+d
 ## Accessiblity (a11y)
 
 ## Tab ordering
@@ -114,17 +114,16 @@ Example:
 @homepage https://github.com/filaraujo/akyral-modal
 -->
 
-<polymer-element name="unl-modal">
+<polymer-element name="unl-modal" role="dialog" aria-labelledby="modal-title">
     <template>
-
-        <link rel="stylesheet" href="unl-modal.css" />
-
+        
         <core-a11y-keys
             target="{{}}"
             keys="esc"
             on-keys-pressed="{{ close }}">
         </core-a11y-keys>
 
+        <h2 id="modal-title">{{heading}}</h2>
         <content id="content"></content>
 
     </template>
@@ -322,8 +321,14 @@ Example:
                 * @method contentsChanged
                 */
                 contentsChanged: function(){
-                    this.appendChild(this.contents);
-                    this.contents.eventController = this.element.findController(this.contents);
+                    //var firstChild = this.firstChild;
+                    this.innerHTML = '';
+                    if(this.contents !== null || typeof this.contents === "undefined") {
+                        var newChild = this.appendChild(this.contents);
+                        if(newChild.hasAttribute('hidden'))
+                            newChild.removeAttribute('hidden');
+                        this.contents.eventController = this.element.findController(this.contents);
+                    }
                 },
 
                 /**

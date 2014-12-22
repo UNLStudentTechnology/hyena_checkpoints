@@ -7,7 +7,7 @@
 <!-- Check in Form -->
 <div class="content-container">
 	<form ng-submit="checkinUser()" horizontal layout>
-		<input ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncard-input" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
+		<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncard-input" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
 		<button>Check In</button>
 	</form>
 </div>

@@ -18,12 +18,12 @@
     <unl-list-item-label ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
       <a ng-href="/{{groupId}}/checkpoint/{{checkpoint.$id}}"></a>
       <div class="tools">
-        <unl-icon-button icon="remove-circle-outline" ng-click="removeCheckpoint('{{checkpoint.$id}}')" class="color-error"></unl-icon-button>
+        <unl-icon-button icon="remove-circle-outline" ng-click="confirmRemoveCheckpoint('{{checkpoint.$id}}')" class="color-error"></unl-icon-button>
       </div>
     </unl-list-item-label>
     <unl-list-item ng-show="groupId">
       <form ng-submit="addCheckpoint()" horizontal layout>
-        <input is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpoint-title" ng-model="checkpointTitle" flex ten>
+        <input required is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpoint-title" ng-model="checkpointTitle" flex ten>
         <button type="submit">Add</button>
       </form>
     </unl-list-item>
@@ -31,3 +31,4 @@
   <!-- End Checkpoint List -->
 </div>
 <!-- End Checkpoints -->
+<div id="modal-checkpoint-delete" hidden ng-include src="'views/partials/modal-checkpoint-delete.html'"></div>

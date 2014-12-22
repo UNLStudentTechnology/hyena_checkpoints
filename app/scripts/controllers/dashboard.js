@@ -10,6 +10,7 @@
  */
 angular.module('hyenaCheckpointsApp')
   .controller('DashboardCtrl', function ($rootScope, $scope, $routeParams, CheckpointService, GroupService, Notification) {
+    $scope.selectedCheckpoint = null;
     //Get the selected group from the route parameters and set it in the scope
     var groupId = $routeParams.groupId;
     $scope.groupId = groupId;
@@ -29,6 +30,10 @@ angular.module('hyenaCheckpointsApp')
      * Add a new checkpoint to the Firebase
      */
     $scope.addCheckpoint = function() {
+      if(angular.isUndefined($scope.checkpointTitle) || $scope.checkpointTitle === "")
+        return;
+
+      //Create the checkpoint object
     	var checkpoint = {
     		title 		  : $scope.checkpointTitle,
     		created_at	: moment().format(),
@@ -50,15 +55,21 @@ angular.module('hyenaCheckpointsApp')
     /**
      * Removes a checkpoint from the Firebase
      */
-    $scope.removeCheckpoint = function(checkpointId) {
-      var removePromise = CheckpointService.remove($scope.groupId, checkpointId);
+    $scope.removeCheckpoint = function() {
+      var removePromise = CheckpointService.remove($scope.groupId, $scope.selectedCheckpoint);
       removePromise.then(function() {
-        console.log('success');
+        Notification.hideModal();
         Notification.show('Your checkpoint has been removed successfully!', 'success');
       }, function(error) {
+        Notification.hideModal();
         console.log('Remove checkpoint error:', error);
         Notification.show(error.message, 'error');
       });
+    };
+
+    $scope.confirmRemoveCheckpoint = function(checkpointId) {
+      $scope.selectedCheckpoint = checkpointId;
+      Notification.showModal('Are you sure?', '#modal-checkpoint-delete');
     };
 
   });

@@ -36,8 +36,8 @@ angular.module('hyenaCheckpointsApp')
 		});
 
 	    $scope.updateSettings = function() {
-	    	if(angular.isUndefined($scope.checkpointTitle))
-	    		return false;
+	    	if(angular.isUndefined($scope.checkpointTitle) || $scope.checkpointTitle === "")
+	    		return;
 
 	    	var checkpointSettings = {
 	    		title 		: $scope.checkpointTitle,

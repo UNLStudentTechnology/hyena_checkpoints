@@ -15,6 +15,11 @@ unl-list-item-label {
 
 		& span {
 			color: @muted;
+			margin-right: 10px;
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 
 		@media (max-width: @breakpointPhone) {
@@ -22,7 +27,7 @@ unl-list-item-label {
 			//width: 100%;
 
 			& input {
-				margin-top: 8px;
+				margin: 8px 0 5px;
 			}
 		}
 	}

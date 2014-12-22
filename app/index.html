@@ -6,8 +6,12 @@
     <title>Checkpoints</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <base href="/">
+
+    <!-- Win8 Tile Color-->
+    <meta name="msapplication-TileColor" content="#D00000">
 
     <!-- iOS Icons -->
     <link rel="apple-touch-icon" sizes="60x60" href="images/icons/Icon-60.png">
@@ -32,17 +36,22 @@
     <link rel="import" href="elements/unl-icon-button/unl-icon-button.html">
     <link rel="import" href="elements/unl-ncard-input/unl-ncard-input.html">
     <link rel="import" href="elements/unl-toast/unl-toast.html">
+    <link rel="import" href="elements/unl-modal/unl-modal.html">
     <link rel="import" href="elements/unl-empty-content/unl-empty-content.html">
     <link rel="import" href="elements/unl-drawer-toggle/unl-drawer-toggle.html">
     <link rel="import" href="elements/unl-toggle-button/unl-toggle-button.html">
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
   </head>
   <body ng-controller="ApplicationCtrl" unresolved>
+    <unl-modal id="unl-modal"></unl-modal>
+    <!-- Login Modal Content -->
+    <div id="modal-content-login" ng-include src="'views/partials/modal-login.html'" onload="showLoginWindow()"></div>
+    <!-- End Modal Content -->
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
