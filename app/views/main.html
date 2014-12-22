@@ -15,8 +15,8 @@
   <!-- Checkpoint List -->
   <unl-empty-content ng-show="checkpoints.length == 0" text="No checkpoints yet"></unl-empty-content>
   <unl-list-group>
-    <unl-list-item-label ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
-      <a ng-href="/{{groupId}}/checkpoint/{{checkpoint.$id}}"></a>
+    <unl-list-item-label class="fx-fade-in-left" ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
+      <a ng-href="/{{groupId}}/checkpoint/{{checkpoint.$id}}"><paper-ripple fit></paper-ripple></a>
       <div class="tools">
         <unl-icon-button icon="remove-circle-outline" ng-click="confirmRemoveCheckpoint('{{checkpoint.$id}}')" class="color-error"></unl-icon-button>
       </div>

@@ -49,6 +49,7 @@ Website URL: http://unl-hyena.herokuapp.com
 @import "type";
 @import "grid";
 @import "flex";
+@import "animation";
 @import "nprogress";
 @import "form";
 @import "core-toolbar";
@@ -131,6 +132,14 @@ sup {
 body /deep/ a {
 	color: @primaryTextColor;
 	text-decoration: none;
+}
+
+/* Remove Tap Highlight */
+body /deep/ a,
+body /deep/ button,
+unl-icon-button,
+unl-toggle-button,
+html /deep/ unl-radio-button {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
  	-webkit-tap-highlight-color: transparent;
 }

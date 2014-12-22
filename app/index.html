@@ -40,6 +40,7 @@
     <link rel="import" href="elements/unl-empty-content/unl-empty-content.html">
     <link rel="import" href="elements/unl-drawer-toggle/unl-drawer-toggle.html">
     <link rel="import" href="elements/unl-toggle-button/unl-toggle-button.html">
+    <link rel="import" href="elements/paper-ripple/paper-ripple.html">
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -69,7 +70,9 @@
                 <!-- End authenticated user options -->
                 <!-- List groups -->
                 <unl-list-item-header label="Groups"></unl-list-item-header>
-                <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link><a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"></a></unl-list-item-label>
+                <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
+                    <a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"><paper-ripple fit></paper-ripple></a>
+                </unl-list-item-label>
                 <!-- End list groups -->
                 </div>
             </unl-list-group>

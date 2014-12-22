@@ -1,0 +1,29 @@
+/* Easing */
+@easing-swift-out: cubic-bezier(.55,0,.1,1);
+
+/* Fade in - Left */
+.fx-fade-in-left.ng-enter, .fx-fade-in-left.ng-leave {
+  position: relative;
+  .transition(.5s @easing-swift-out all);
+}
+
+.fx-fade-in-left.ng-enter { 
+	left: -20px;
+	opacity: 0;
+} /* starting animations for enter */
+
+.fx-fade-in-left.ng-enter.ng-enter-active { 
+	left: 0;
+	opacity: 1;
+} /* terminal animations for enter */
+
+.fx-fade-in-left.ng-leave { 
+	left: 0;
+	opacity: 1;
+} /* starting animations for leave */
+
+.fx-fade-in-left.ng-leave.ng-leave-active { 
+	left: -20px;
+	opacity: 0;
+} /* terminal animations for leave */
+/* End Fade In - Left */

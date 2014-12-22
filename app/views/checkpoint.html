@@ -17,7 +17,7 @@
 	<unl-empty-content ng-hide="checkpoint.checkins" text="No checkins yet"></unl-empty-content>
 	<unl-list-group ng-show="checkpoint.checkins">
 		<unl-list-item-header label="Past Checkins"></unl-list-item-header>
-		<unl-list-item-label image="{{ checkin.user.profile_image }}" heading="{{ checkin.user.first_name ? checkin.user.first_name +' '+ checkin.user.last_name : checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkpoint.checkins | orderBy:'created_at':true"></unl-list-item-label>
+		<unl-list-item-label class="fx-fade-in-left" image="{{ checkin.user.profile_image }}" heading="{{ checkin.user.first_name ? checkin.user.first_name +' '+ checkin.user.last_name : checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkpoint.checkins | orderBy:'created_at':true"></unl-list-item-label>
 	</unl-list-group>
 </div>
 <!-- End Checkins -->
