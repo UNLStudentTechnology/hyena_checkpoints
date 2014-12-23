@@ -9,7 +9,7 @@
  * REQUIRES the session and user service.
  */
 angular.module('hyenaCheckpointsApp')
-  .service('AuthService', function ($http, Session, UserService, APIKEY, APIPATH, AppFirebase) {
+  .service('AuthService', function ($http, $sessionStorage, $localStorage, UserService, APIKEY, APIPATH, AppFirebase) {
     var firebaseAuthRef = AppFirebase.getRef();
 
     var AuthService = {
@@ -20,7 +20,7 @@ angular.module('hyenaCheckpointsApp')
        * @return N/A
        */
       login: function() {
-        Session.set('currentRoute', window.location.href);
+        $sessionStorage.currentRoute = window.location.href;
         window.location.replace(APIPATH+'users/login?api_key='+APIKEY+'&callback='+window.location.href);
       },
 
@@ -32,7 +32,7 @@ angular.module('hyenaCheckpointsApp')
       manualLogin: function(userId, authToken) {
         var auth_user = UserService.get(userId, 'groups');
         return auth_user.then(function(user) {
-          if(Session.createAuthSession(userId, authToken))
+          if(AuthService.createAuthSession(userId, authToken))
             return AuthService.user();
           else
             return false;
@@ -49,6 +49,13 @@ angular.module('hyenaCheckpointsApp')
         window.location.replace(APIPATH+'users/logout?api_key='+APIKEY);
       },
 
+      createAuthSession: function(userId, authToken) {
+        $localStorage.auth = true;
+        $localStorage.authUser = userId;
+        $localStorage.authToken = authToken;
+        return true;
+      },
+
       /**
        * Gets the user object of the currently logged in user
        * @return Promise
@@ -59,8 +66,8 @@ angular.module('hyenaCheckpointsApp')
       },
 
       userId: function() {
-        if(Session.has('auth'))
-          return Session.get('authUser');
+        if($localStorage.auth)
+          return $localStorage.authUser;
         else
           return false;
       },
@@ -70,7 +77,7 @@ angular.module('hyenaCheckpointsApp')
        * @return bool
        */
       check: function() {
-        return Session.has('auth');
+        return !!$localStorage.auth;
       },
 
       /**
@@ -79,7 +86,9 @@ angular.module('hyenaCheckpointsApp')
        */
       expire: function() {
         firebaseAuthRef.unauth();
-        return !!Session.destroyAuthSession();
+        delete $localStorage.auth;
+        delete $localStorage.authUser;
+        delete $localStorage.authToken;
       }
 
     };

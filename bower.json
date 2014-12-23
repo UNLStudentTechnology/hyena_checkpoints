@@ -1,6 +1,6 @@
 {
   "name": "hyena-checkpoints",
-  "version": "0.0.1",
+  "version": "0.9",
   "dependencies": {
     "angular": "~1.2.0",
     "json3": "~3.3.1",
@@ -17,7 +17,8 @@
     "core-elements": "Polymer/core-elements#~0.4.2",
     "webcomponentsjs": "~0.5.1",
     "angular-moment": "~0.8.2",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "ngstorage": "~0.3.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
