@@ -82,6 +82,7 @@ angular.module('hyenaCheckpointsApp')
     	//Do the checkin
     	var checkinPromise = CheckpointService.checkin($scope.group, $scope.checkpoint.$id, checkin);
     	checkinPromise.then(function(response) {
+        console.log('Checkin Response', response);
     		$scope.checkinNcard = '';
     		Notification.show('Thanks! You have been checked in!', 'success');
     	}, function(error) {
