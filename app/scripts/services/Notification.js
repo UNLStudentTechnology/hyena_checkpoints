@@ -11,12 +11,12 @@ angular.module('hyenaCheckpointsApp')
   .service('Notification', function Notification() {
 
     var NotificationService = {
-    	show: function(text, type) {
-    		var toast = document.querySelector('unl-toast');
+      show: function(text, type) {
+        var toast = document.querySelector('unl-toast');
         toast.setAttribute("text", text);
         toast.setAttribute("type", type);
         toast.show();
-    	},
+      },
 
       showModal: function(heading, content) {
         var modal = document.querySelector('#unl-modal');

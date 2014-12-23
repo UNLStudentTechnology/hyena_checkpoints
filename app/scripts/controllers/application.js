@@ -9,13 +9,13 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, AppFirebase, Session, Notification, FBURL, AUTH_EVENTS) {
+  .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, AppFirebase, Notification, FBURL, AUTH_EVENTS) {
     //Initialize some variables
     $scope.currentUser = null;
 
     //AUTHENTICATION FLOW
     var auth_user = null;
-    if(typeof $location.search().user !== 'undefined') //If this is new log in from CAS
+    if(angular.isDefined($location.search().user)) //If this is new log in from CAS
     {
       //Get Query Params
       var authToken = $location.search().token;
@@ -53,7 +53,7 @@ angular.module('hyenaCheckpointsApp')
       //console.log('currentUser', newVal, oldVal);
       if(oldVal !== null && (angular.isUndefined(newVal) || newVal === null))
         Notification.showModal('Please log in', '#modal-content-login');
-      else
+      else if(oldVal !== null)
         Notification.hideModal();
     });
     
