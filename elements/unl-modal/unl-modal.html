@@ -323,7 +323,7 @@ Example:
                 contentsChanged: function(){
                     //var firstChild = this.firstChild;
                     this.innerHTML = '';
-                    if(this.contents !== null && typeof this.contents !== "undefined") {
+                    if(this.contents !== null || typeof this.contents === "undefined") {
                         var newChild = this.appendChild(this.contents);
                         if(newChild.hasAttribute('hidden'))
                             newChild.removeAttribute('hidden');

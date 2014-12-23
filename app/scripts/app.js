@@ -16,7 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngStorage',
     'firebase',
     'angularMoment'
   ])
@@ -29,6 +28,9 @@ angular
       .when('/:groupId', {
         templateUrl: 'views/main.html',
         controller: 'DashboardCtrl'
+      })
+      .when('/login', {
+        controller: 'LoginCtrl'
       })
       .when('/:groupId/checkpoint/:checkpointId', {
         templateUrl: 'views/checkpoint.html',
