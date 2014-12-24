@@ -124,4 +124,27 @@ angular.module('hyenaCheckpointsApp')
       Notification.hideModal();
     };
 
+    /**
+     * Manages page navigation and allows to specify a page animation
+     * class to be set.
+     * @param  string path                  href to location
+     * @param  string pageAnimationClass    CSS animation class
+     */
+    $scope.go = function (path, pageAnimationClass) {
+      if (typeof(pageAnimationClass) === 'undefined') { // Use a default, your choice
+          $scope.pageAnimationClass = 'animate-slide-right';
+      } 
+      else { // Use the specified animation
+          $scope.pageAnimationClass = pageAnimationClass;
+      }
+
+      if (path === 'back') { // Allow a 'back' keyword to go to previous page
+          $scope.pageAnimationClass = 'animate-slide-left';
+          $window.history.back();
+      }    
+      else { // Go to the specified path
+          $location.path(path);
+      }
+    };
+
   });

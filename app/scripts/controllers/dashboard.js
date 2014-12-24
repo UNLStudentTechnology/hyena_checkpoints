@@ -69,7 +69,7 @@ angular.module('hyenaCheckpointsApp')
 
     $scope.confirmRemoveCheckpoint = function(checkpointId) {
       $scope.selectedCheckpoint = checkpointId;
-      Notification.showModal('Are you sure?', '#modal-checkpoint-delete');
+      Notification.showModal('Delete Checkpoint', '#modal-checkpoint-delete');
     };
 
   });

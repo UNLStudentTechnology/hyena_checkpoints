@@ -51,7 +51,7 @@
     <!-- endbuild -->
   </head>
   <body ng-controller="ApplicationCtrl" unresolved>
-    <unl-modal id="unl-modal"></unl-modal>
+    <unl-modal id="unl-modal" type="takeover"></unl-modal>
     <!-- Login Modal Content -->
     <div id="modal-content-login" ng-include src="'views/partials/modal-login.html'" onload="showLoginWindow()"></div>
     <!-- End Modal Content -->
@@ -74,14 +74,14 @@
                 <!-- List groups -->
                 <unl-list-item-header label="Groups"></unl-list-item-header>
                 <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
-                    <a ng-href="/{{group.id}}" ng-click="closeMainDrawer()"><paper-ripple fit></paper-ripple></a>
+                    <a ng-click="go('/{{group.id}}', 'animate-slide-left'); closeMainDrawer()"><paper-ripple fit></paper-ripple></a>
                 </unl-list-item-label>
                 <!-- End list groups -->
                 </div>
             </unl-list-group>
         </div>
         <div main>
-            <div ng-view=""></div>
+            <div ng-view="" ng-class="pageAnimationClass"></div>
         </div>
     </unl-layout>
     <unl-toast text=""></unl-toast>
