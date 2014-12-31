@@ -13,7 +13,8 @@ angular.module('hyenaCheckpointsApp')
     $scope.selectedCheckpoint = null;
     //Get the selected group from the route parameters and set it in the scope
     var groupId = $routeParams.groupId;
-    $scope.groupId = groupId;
+    $scope.groupId = $rootScope.currentGroupId = groupId;
+    
 
     //Check and see if the group exists in the Firebase, if not, add it.
     if(angular.isDefined(groupId))

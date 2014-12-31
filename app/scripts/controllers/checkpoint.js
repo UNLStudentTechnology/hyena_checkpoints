@@ -15,6 +15,7 @@ angular.module('hyenaCheckpointsApp')
     $scope.checkpoint = null;
   	var groupId = $routeParams.groupId;
   	$scope.group = groupId;
+    $scope.currentGroupId = groupId;
   	//End declare variables
 
   	//Get checkpoints for the active group

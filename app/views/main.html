@@ -6,7 +6,7 @@
 <div class="content-container" ng-hide="groupId">
   <!-- Group List -->
   <unl-list-group>
-    <unl-list-item-label class="animate-fade-in-left" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link><a ng-href="/{{group.id}}"><paper-ripple fit></paper-ripple></a></unl-list-item-label>
+    <unl-list-item-label class="animate-fade-left" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link><a ng-href="/{{group.id}}"><paper-ripple fit></paper-ripple></a></unl-list-item-label>
   </unl-list-group>
   <!-- End Group List -->
 </div>
@@ -15,16 +15,16 @@
   <!-- Checkpoint List -->
   <unl-empty-content ng-show="checkpoints.length == 0" text="No checkpoints yet"></unl-empty-content>
   <unl-list-group>
-    <unl-list-item-label class="animate-fade-in-left" ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
+    <unl-list-item-label class="animate-fade-left" ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
       <a ng-click="go('/{{groupId}}/checkpoint/{{checkpoint.$id}}')"><paper-ripple fit></paper-ripple></a>
       <div class="tools show-on-hover">
         <unl-icon-button icon="delete" ng-click="confirmRemoveCheckpoint('{{checkpoint.$id}}')"></unl-icon-button>
       </div>
     </unl-list-item-label>
     <unl-list-item ng-show="groupId">
-      <form ng-submit="addCheckpoint()" horizontal layout>
+      <form name="newCheckpointForm" ng-submit="addCheckpoint()" horizontal layout>
         <input required is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpoint-title" ng-model="checkpointTitle" flex ten>
-        <button type="submit">Add</button>
+        <button type="submit" ng-disabled="newCheckpointForm.$invalid">Add</button>
       </form>
     </unl-list-item>
   </unl-list-group>

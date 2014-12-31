@@ -15,9 +15,16 @@
 }
 
 .animate-page {
+  box-sizing: border-box;
 	position: absolute;
-	width: 100%;
+  width: ~"calc(100% - 270px)";
+  width: ~"-webkit-calc(100% - 270px)";
+  width: ~"-moz-calc(100% - 270px)";
 	.animation(1s @easing-swift-out);
+
+  @media (max-width: @breakpointTablet) {
+    width: 100%;
+  }
 }
 
 /* Fade Left */

@@ -4,9 +4,9 @@
 Created by Hayden Gascoigne
 -->
 
-<polymer-element name="unl-list-item-label" attributes="heading label link image">
+<polymer-element name="unl-list-item-label" attributes="heading label link image active">
   <template>
-    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}}" horizontal layout wrap>  
+    <li class="unl-list-item {{link ? 'unl-list-item-link' : ''}} {{active ? 'active' : ''}}" horizontal layout wrap>  
       <template if="{{image}}">
       <div class="list-item-image rounded">
         <img src="https://s3.amazonaws.com/unlqna/uploads/user_images/{{image}}" alt="List Item Image"/>
@@ -43,7 +43,8 @@ Created by Hayden Gascoigne
   <script>
       (function(){
         Polymer('unl-list-item-label', {
-          link: false
+          link: false,
+          active: false
         });
       }());
     </script>

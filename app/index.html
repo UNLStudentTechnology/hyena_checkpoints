@@ -50,7 +50,7 @@
     <!-- endbower -->
     <!-- endbuild -->
   </head>
-  <body ng-controller="ApplicationCtrl" unresolved>
+  <body ng-controller="ApplicationCtrl" ng-show="appLoaded" unresolved>
     <unl-modal id="unl-modal" type="takeover"></unl-modal>
     <!-- Login Modal Content -->
     <div id="modal-content-login" ng-include src="'views/partials/modal-login.html'" onload="showLoginWindow()"></div>
@@ -73,7 +73,7 @@
                 <!-- End authenticated user options -->
                 <!-- List groups -->
                 <unl-list-item-header label="Groups"></unl-list-item-header>
-                <unl-list-item-label ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
+                <unl-list-item-label ng-attr-active="{{group.id==currentGroupId}}" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
                     <a ng-click="go('/{{group.id}}', 'animate-slide-left'); closeMainDrawer()"><paper-ripple fit></paper-ripple></a>
                 </unl-list-item-label>
                 <!-- End list groups -->

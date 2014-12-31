@@ -19,4 +19,12 @@ body /deep/ textarea {
 
     	.transition(.2s ease-in-out border-color);
     }
+
+    &.ng-dirty.ng-invalid, .invalid {
+    	// border-color: @error;
+    }
+
+    &[disabled] {
+    	cursor: not-allowed;
+    }
 }

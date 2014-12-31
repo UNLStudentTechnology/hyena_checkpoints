@@ -31,4 +31,20 @@ unl-list-item-label {
 			}
 		}
 	}
+
+	& .show-on-hover {
+		opacity: 0;
+		right: -20px;
+		visibility: hidden;
+		.transition(0.5s @easing-swift-out);
+	}
+
+	&:hover {
+		& .show-on-hover {
+			opacity: 1;
+			right: 0;
+			visibility: visible;
+			.transition(0.5s @easing-swift-out);
+		}
+	}
 }

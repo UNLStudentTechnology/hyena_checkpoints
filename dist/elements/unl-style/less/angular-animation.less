@@ -15,18 +15,25 @@
 }
 
 .animate-page {
+  box-sizing: border-box;
 	position: absolute;
-	width: 100%;
+  width: ~"calc(100% - 270px)";
+  width: ~"-webkit-calc(100% - 270px)";
+  width: ~"-moz-calc(100% - 270px)";
 	.animation(1s @easing-swift-out);
+
+  @media (max-width: @breakpointTablet) {
+    width: 100%;
+  }
 }
 
 /* Fade Left */
-.animate-fade-in-left.ng-enter {
+.animate-fade-left.ng-enter {
 	.animate-default();
 	.animation-name(fade-left-in);
 }
 
-.animate-fade-in-left.ng-leave {
+.animate-fade-left.ng-leave {
 	.animate-default();
 	.animation-name(fade-left-out);
 }
@@ -48,15 +55,45 @@
   from { left: 0; opacity:1; }
   to { left: -20px; opacity:0; }
 }
-/* End Fade In Left */
+/* End Fade Left */
 
-/* Slide in right */
-.animate-slide-in-right.ng-enter {
+/* Fade Right */
+.animate-fade-right.ng-enter {
+	.animate-default();
+	.animation-name(fade-right-in);
+}
+
+.animate-fade-right.ng-leave {
+	.animate-default();
+	.animation-name(fade-right-out);
+}
+
+@-webkit-keyframes fade-right-in {
+  from { right: -20px; opacity:0; }
+  to { right: 0; opacity:1; }
+}
+@keyframes fade-right-in {
+  from { right: -20px; opacity:0; }
+  to { right: 0; opacity:1; }
+}
+
+@-webkit-keyframes fade-right-out {
+  from { right: 0; opacity:1; }
+  to { right: -20px; opacity:0; }
+}
+@keyframes fade-right-out {
+  from { right: 0; opacity:1; }
+  to { right: -20px; opacity:0; }
+}
+/* End Fade Right */
+
+/* Slide right */
+.animate-slide-right.ng-enter {
   	.animate-page();
   	.animation-name(slide-right-in);
 }
 
-.animate-slide-in-right.ng-leave {
+.animate-slide-right.ng-leave {
 	.animate-page();
   	.animation-name(slide-right-out);
 }
@@ -78,4 +115,34 @@
   from { }
   to { .transform(translateX(-100%)) }
 }
-/* End slide in right */
+/* End slide right */
+
+/* Slide left */
+.animate-slide-left.ng-enter {
+  	.animate-page();
+  	.animation-name(slide-left-in);
+}
+
+.animate-slide-left.ng-leave {
+	.animate-page();
+  	.animation-name(slide-left-out);
+}
+
+@-webkit-keyframes slide-left-in {
+  from { .transform(translateX(-100%)) }
+  to { .transform(translateX(0%)) }
+}
+@keyframes slide-left-in {
+  from { .transform(translateX(-100%)) }
+  to { .transform(translateX(0%)) }
+}
+
+@-webkit-keyframes slide-left-out {
+  from { }
+  to { .transform(translateX(100%)) }
+}
+@keyframes slide-left-out {
+  from { }
+  to { .transform(translateX(100%)) }
+}
+/* End slide left */

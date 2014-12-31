@@ -23,6 +23,7 @@ body /deep/ unl-toolbar {
 	}
 
 	& unl-icon-button {
+		color: #fff;
 		height: 37px;
 		// position: relative;
 		// top: -6px;
@@ -47,13 +48,14 @@ body /deep/ unl-toolbar {
 		background-position: 5px 9px;
 		background-repeat: no-repeat;
 		background-size: 46px;
+		border-right-width: 1px;
 		padding-left: 60px;
 		text-transform: uppercase;
 		.brand-font();
 	}
 
 	& unl-drawer-toggle {
-		border-right: 1px solid @subtle;
+		border-right: 1px solid darken(@brand, 10%);
 		padding: 8px 8px 8px 0;
 		margin: -8px 8px -8px 0;
 	}

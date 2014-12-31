@@ -23,7 +23,8 @@ unl-layout {
 				padding: @unl-layout-drawer-padding;
 
 				&.unl-list-item-link:hover,
-				&.unl-list-item-link.active {
+				&.unl-list-item-link.active,
+				&.active {
 					background: lighten(@subtle, 5%);
 				}
 			}
@@ -52,6 +53,14 @@ unl-layout {
 			background: @unl-layout-bg-color;
 			border-bottom: 1px solid @subtle;
 			color: @primaryTextColor;
+
+			& unl-icon-button {
+				color: @primaryTextColor;
+			}
+
+			& unl-drawer-toggle {
+				border-right-color: @subtle;
+			}
 		}
 	}
 

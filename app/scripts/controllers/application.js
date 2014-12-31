@@ -11,11 +11,12 @@
 angular.module('hyenaCheckpointsApp')
   .controller('ApplicationCtrl', function ($rootScope, $scope, $location, $window, $routeParams, $firebase, AuthService, UserService, AppFirebase, Notification, FBURL, AUTH_EVENTS) {
     //Initialize some variables
+    $scope.appLoaded = null;
     $scope.currentUser = null;
+    $rootScope.currentGroupId = 0;
 
     //AUTHENTICATION FLOW
-    var auth_user = null;
-    if(angular.isDefined($location.search().user)) //If this is new log in from CAS
+    if(angular.isDefined($location.search().token)) //If this is new log in from CAS
     {
       //Get Query Params
       var authToken = $location.search().token;
@@ -32,7 +33,7 @@ angular.module('hyenaCheckpointsApp')
         console.error("Login failed:", error);
       });
     }
-    else if(AuthService.check()) //Already authenticated, attempt to get existing session
+    else if(AuthService.check() && AppFirebase.getAuthRef().$getAuth()) //Already authenticated, attempt to get existing session
     {
       AuthService.user().then(function(user) {
         $scope.currentUser = user.data;
@@ -43,6 +44,7 @@ angular.module('hyenaCheckpointsApp')
       AuthService.login(); //Start the CAS flow
       Notification.showModal('Please log in', '#modal-content-login');
     }
+    $scope.appLoaded = true;
     //END AUTHENTICATION FLOW
 
     /** 
@@ -67,14 +69,13 @@ angular.module('hyenaCheckpointsApp')
       AuthService.login();
     });
 
-    /**
-     * Event handler for deauthorization from Firebase
-     */
-    AppFirebase.getAuthRef().$onAuth(function(authData) {
-      //console.log(authData);
-      if(!authData)
-      {
-        //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+    $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+      // We can catch the error thrown when the $requireAuth promise is rejected
+      // and redirect the user back to the home page
+      if (error === "AUTH_REQUIRED" && $location.search().token) {
+        console.log($location.search().token);
+        // AuthService.expire();
+        // AuthService.login();
       }
     });
 
