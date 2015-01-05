@@ -49,6 +49,7 @@ angular.module('hyenaCheckpointsApp')
 	    		if(!$scope.checkpoint.non_members) //If members aren't allowed
 	    		{
 	    			$scope.checkinNcard = '';
+            $scope.checkinUserForm.$setPristine();
 		    		Notification.show('Sorry! You are not a member of this group.', 'error');
 		    	}
 		    	else
@@ -63,6 +64,7 @@ angular.module('hyenaCheckpointsApp')
     	}, function(error) {
     		//Unable to validate, log the error
         $scope.checkinNcard = '';
+        $scope.checkinUserForm.$setPristine();
     		console.log(error);
     		Notification.show(error.data, 'error');
     	});
@@ -84,14 +86,15 @@ angular.module('hyenaCheckpointsApp')
     	var checkinPromise = CheckpointService.checkin($scope.group, $scope.checkpoint.$id, checkin);
     	checkinPromise.then(function(response) {
         console.log('Checkin Response', response);
-    		$scope.checkinNcard = '';
     		Notification.show('Thanks! You have been checked in!', 'success');
     	}, function(error) {
     		//Unable to validate, log the error
-        $scope.checkinNcard = '';
+        
     		console.log('Checkin error', error);
     		Notification.show('Sorry! You are already checked in!', 'error');
     	});
+      $scope.checkinNcard = '';
+      $scope.checkinUserForm.$setPristine();
     }
 
   });

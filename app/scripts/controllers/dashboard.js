@@ -45,6 +45,7 @@ angular.module('hyenaCheckpointsApp')
     	var promise = CheckpointService.add($scope.groupId, checkpoint);
     	promise.then(function() {
     		$scope.checkpointTitle = '';
+        $scope.newCheckpointForm.$setPristine();
         //Show notification
         Notification.show('Your checkpoint has been added successfully!', 'success');
     	}, function(error) {

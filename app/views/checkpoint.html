@@ -6,9 +6,12 @@
 </unl-toolbar>
 <!-- Check in Form -->
 <div class="content-container">
-	<form name="checkinUserForm" ng-submit="checkinUser()" horizontal layout>
-		<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncard-input" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
-		<button type="submit" ng-disabled="checkinUserForm.$invalid">Check In</button>
+	<form name="checkinUserForm" ng-submit="checkinUser()" novalidate>
+		<div horizontal layout>
+			<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncardInput" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
+			<button type="submit" ng-disabled="checkinUserForm.$invalid">Check In</button>
+		</div>
+        <div ng-show="checkinUserForm.ncardInput.$dirty" ng-messages="checkinUserForm.ncardInput.$error" ng-messages-include="form-validation-messages" class="input-help color-error"></div>
 	</form>
 </div>
 <!-- End Check in Form -->

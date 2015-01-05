@@ -22,9 +22,12 @@
       </div>
     </unl-list-item-label>
     <unl-list-item ng-show="groupId">
-      <form name="newCheckpointForm" ng-submit="addCheckpoint()" horizontal layout>
-        <input required is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpoint-title" ng-model="checkpointTitle" flex ten>
-        <button type="submit" ng-disabled="newCheckpointForm.$invalid">Add</button>
+      <form name="newCheckpointForm" ng-submit="addCheckpoint()" novalidate>
+        <div horizontal layout>
+          <input required is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpointTitle" ng-model="checkpointTitle" flex ten>
+          <button type="submit" ng-disabled="newCheckpointForm.$invalid">Add</button>
+        </div>
+        <div ng-show="newCheckpointForm.checkpointTitle.$dirty" ng-messages="newCheckpointForm.checkpointTitle.$error" ng-messages-include="form-validation-messages" class="input-help color-error"></div>
       </form>
     </unl-list-item>
   </unl-list-group>

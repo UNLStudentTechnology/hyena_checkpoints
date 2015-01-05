@@ -37,6 +37,12 @@ unl-list-item-label {
 		right: -20px;
 		visibility: hidden;
 		.transition(0.5s @easing-swift-out);
+
+		@media (max-width: @breakpointTablet) {
+			opacity: 1;
+			right: 0;
+			visibility: visible;
+		}
 	}
 
 	&:hover {

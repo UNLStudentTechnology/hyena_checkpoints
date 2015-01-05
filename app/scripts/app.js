@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'ngStorage',
     'firebase',
-    'angularMoment'
+    'angularMoment',
+    'ngMessages'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

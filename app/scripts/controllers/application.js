@@ -33,7 +33,7 @@ angular.module('hyenaCheckpointsApp')
         console.error("Login failed:", error);
       });
     }
-    else if(AuthService.check() && AppFirebase.getAuthRef().$getAuth()) //Already authenticated, attempt to get existing session
+    else if(AuthService.check() && AppFirebase.getAuthRef().$getAuth() !== null) //Already authenticated, attempt to get existing session
     {
       AuthService.user().then(function(user) {
         $scope.currentUser = user.data;
