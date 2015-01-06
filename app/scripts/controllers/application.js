@@ -69,13 +69,9 @@ angular.module('hyenaCheckpointsApp')
       AuthService.login();
     });
 
-    $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
-      // We can catch the error thrown when the $requireAuth promise is rejected
-      // and redirect the user back to the home page
-      if (error === "AUTH_REQUIRED" && $location.search().token) {
-        console.log($location.search().token);
-        // AuthService.expire();
-        // AuthService.login();
+    AppFirebase.getAuthRef().$onAuth(function(authData) {
+      if (!authData) {
+        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
       }
     });
 
