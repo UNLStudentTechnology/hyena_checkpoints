@@ -12,19 +12,15 @@ angular.module('hyenaCheckpointsApp')
   .controller('CheckpointCtrl', function ($scope, $http, $routeParams, CheckpointService, UserService, GroupService, Notification, APIPATH) {
   	//Declare variables
   	var checkpointId = $routeParams.checkpointId;
-    $scope.checkpoint = null;
+    $scope.checkpoint = $scope.checkins = null;
   	var groupId = $routeParams.groupId;
   	$scope.group = groupId;
     $scope.currentGroupId = groupId;
   	//End declare variables
 
   	//Get checkpoints for the active group
-    var checkpoint = CheckpointService.get(groupId, checkpointId);
-    $scope.checkpoint = checkpoint; //checkpoint.$bindTo($scope, 'checkpoint');
-  	checkpoint.$watch(function() {
-  		//Transform the blackboard usernames into user objects
-  		$scope.checkpoint.checkins = UserService.getUserRelations($scope.checkpoint.checkins); 
-  	});
+    $scope.checkpoint = CheckpointService.get(groupId, checkpointId).$asObject();
+    $scope.checkins = CheckpointService.checkins(groupId, checkpointId).$asArray();
 
 	/**
 	 * Checks in a user to a particular checkpoint
@@ -85,11 +81,10 @@ angular.module('hyenaCheckpointsApp')
     	//Do the checkin
     	var checkinPromise = CheckpointService.checkin($scope.group, $scope.checkpoint.$id, checkin);
     	checkinPromise.then(function(response) {
-        console.log('Checkin Response', response);
+        //console.log('Checkin Response', response);
     		Notification.show('Thanks! You have been checked in!', 'success');
     	}, function(error) {
     		//Unable to validate, log the error
-        
     		console.log('Checkin error', error);
     		Notification.show('Sorry! You are already checked in!', 'error');
     	});

@@ -10,10 +10,10 @@
  */
 angular.module('hyenaCheckpointsApp')
   .filter('user', function (UserService) {
-    return function (input) {
-    	var userResponse = UserService.get(input);
-    	return userResponse.then(function(user) {
-    		return "yes";
-    	});
+    var userFilter = function (input) {
+    	var user = UserService.getUserRelations(input);
+    	return input;
     };
+    userFilter.$stateful = true;
+    return userFilter;
   });

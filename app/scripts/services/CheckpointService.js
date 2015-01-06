@@ -16,10 +16,10 @@ angular.module('hyenaCheckpointsApp')
 				return checkpointsRef.child('groups/'+groupId+'/checkpoints');
 			},
 			get: function getCheckpoint(groupId, checkpointId) {
-				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId)).$asObject();
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId));
 			},
 			sync: function sync(groupId, limit) {
-				return $firebase(CheckpointService.groupFirebaseRef(groupId).limit(limit)).$asArray();
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).limit(limit));
 			},
 			add: function addCheckpoint(groupId, checkpoint) {
 				return $firebase(CheckpointService.groupFirebaseRef(groupId)).$push(checkpoint);
@@ -32,6 +32,9 @@ angular.module('hyenaCheckpointsApp')
 			},
 			checkin: function checkinUser(groupId, checkpointId, checkin) {
 				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId+'/checkins')).$set(checkin.user, checkin);
+			},
+			checkins: function getCheckins(groupId, checkpointId) {
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId+'/checkins'));
 			}
 		};
 

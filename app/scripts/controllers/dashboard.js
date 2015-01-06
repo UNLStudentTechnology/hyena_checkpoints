@@ -23,7 +23,7 @@ angular.module('hyenaCheckpointsApp')
     
     //Load a list of checkpoints
   	$scope.checkpoints = null;
-    $scope.checkpoints = CheckpointService.sync(groupId, 10);
+    $scope.checkpoints = CheckpointService.sync(groupId, 10).$asArray();
 	  //checkpoints.$bindTo($scope, 'checkpoints');
     //console.log($scope.checkpoints);
 
