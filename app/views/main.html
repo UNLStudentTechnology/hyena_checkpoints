@@ -1,37 +1,14 @@
 <unl-toolbar>
   <unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
-  <span flex class="align-center" ng-if="groupId">Checkpoints</span>
-  <span flex class="align-center" ng-if="!groupId">Groups</span>
+  <span flex class="align-center">My Apps on Hyena</span>
 </unl-toolbar>
-<div class="content-container" ng-hide="groupId">
-  <!-- Group List -->
+<div class="content-container">
   <unl-list-group>
-    <unl-list-item-label class="animate-fade-left" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link><a ng-href="/{{group.id}}"><paper-ripple fit></paper-ripple></a></unl-list-item-label>
-  </unl-list-group>
-  <!-- End Group List -->
-</div>
-<!-- Checkpoints -->
-<div class="content-container" ng-show="groupId">
-  <!-- Checkpoint List -->
-  <unl-empty-content ng-show="checkpoints.length == 0" text="No checkpoints yet"></unl-empty-content>
-  <unl-list-group>
-    <unl-list-item-label class="animate-fade-left" ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
-      <a ng-click="go('/{{groupId}}/checkpoint/{{checkpoint.$id}}')"><paper-ripple fit></paper-ripple></a>
-      <div class="tools show-on-hover">
-        <unl-icon-button icon="delete" ng-click="confirmRemoveCheckpoint('{{checkpoint.$id}}')"></unl-icon-button>
+    <unl-list-item-label ng-repeat="app in currentUser.apps | orderBy:'title'" heading="{{app.title}}" label="{{app.description}}" image="{{app.icon_url}}" link>
+      <a ng-click="go('/app/{{app.id}}')" title="View {{app.title}}"></a>
+      <div class="tools">
+        <span ng-class="{'color-success': app.active === 1}">{{app.active === 1 ? 'Active' : 'Disabled'}}</span>
       </div>
     </unl-list-item-label>
-    <unl-list-item ng-show="groupId">
-      <form name="newCheckpointForm" ng-submit="addCheckpoint()" novalidate>
-        <div horizontal layout>
-          <input required is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpointTitle" ng-model="checkpointTitle" flex ten>
-          <button type="submit" ng-disabled="newCheckpointForm.$invalid">Add</button>
-        </div>
-        <div ng-show="newCheckpointForm.checkpointTitle.$dirty" ng-messages="newCheckpointForm.checkpointTitle.$error" ng-messages-include="form-validation-messages" class="input-help color-error"></div>
-      </form>
-    </unl-list-item>
   </unl-list-group>
-  <!-- End Checkpoint List -->
 </div>
-<!-- End Checkpoints -->
-<div id="modal-checkpoint-delete" hidden ng-include src="'views/partials/modal-checkpoint-delete.html'"></div>

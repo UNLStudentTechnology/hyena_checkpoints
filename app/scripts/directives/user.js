@@ -18,12 +18,12 @@ angular.module('hyenaCheckpointsApp')
       	// console.log('Directive', scope.userValue);
       	var userId = scope.userValue;
       	scope.$watch('userValue', function(newValue, oldValue) {
-      		if(angular.isDefined(newValue) && !angular.isObject(newValue)) {
-				UserService.get(newValue).then(function(response) {
-					scope.userValue = response.data;
-				});
-			}
-		});
+          if(angular.isDefined(newValue) && !angular.isObject(newValue)) {
+            UserService.get(newValue).then(function(response) {
+              scope.userValue = response.data;
+            });
+          }
+        });
       }
     };
   });
