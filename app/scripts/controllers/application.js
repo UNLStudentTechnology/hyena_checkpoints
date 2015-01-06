@@ -69,11 +69,11 @@ angular.module('hyenaCheckpointsApp')
       AuthService.login();
     });
 
-    AppFirebase.getAuthRef().$onAuth(function(authData) {
-      if (!authData) {
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-      }
-    });
+    // AppFirebase.getAuthRef().$onAuth(function(authData) {
+    //   if (!authData) {
+    //     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+    //   }
+    // });
 
     /**
      * Sets the current user on scope.
