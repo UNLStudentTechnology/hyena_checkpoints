@@ -18,14 +18,13 @@ angular.module('hyenaCheckpointsApp')
     //AUTHENTICATION FLOW
     if(angular.isDefined($location.search().token)) //If this is new log in from CAS
     {
-      $scope.appLoaded = true;
       //Get Query Params
       var authToken = $location.search().token;
       $location.url($location.path()); //Clear query params from address bar
       //Evaluate token from platform
       var tokenUser = AppFirebase.authenticate(authToken).then(function(authData) {
         //Process the user login
-        AuthService.manualLogin(authData.uid, authToken, 'apps').then(function(user) {
+        AuthService.manualLogin(authData.uid, authToken).then(function(user) {
           $scope.currentUser = user.data;
         }, function(error) {
           console.log('Login Error', error);
@@ -36,8 +35,7 @@ angular.module('hyenaCheckpointsApp')
     }
     else if(AuthService.check() && AppFirebase.getAuthRef().$getAuth() !== null) //Already authenticated, attempt to get existing session
     {
-      $scope.appLoaded = true;
-      AuthService.user('apps').then(function(user) {
+      AuthService.user().then(function(user) {
         $scope.currentUser = user.data;
       });
     }
@@ -46,6 +44,7 @@ angular.module('hyenaCheckpointsApp')
       AuthService.login(); //Start the CAS flow
       Notification.showModal('Please log in', '#modal-content-login');
     }
+    $scope.appLoaded = true;
     //END AUTHENTICATION FLOW
 
     /** 

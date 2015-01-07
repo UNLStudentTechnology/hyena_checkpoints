@@ -29,14 +29,11 @@ angular.module('hyenaCheckpointsApp')
        * @param  string userId Blackboard Username
        * @return Promise
        */
-      manualLogin: function(userId, authToken, scope) {
-        if(angular.isUndefined(scope))
-          scope = '';
-
-        var auth_user = UserService.get(userId, scope);
+      manualLogin: function(userId, authToken) {
+        var auth_user = UserService.get(userId, 'groups');
         return auth_user.then(function(user) {
           if(AuthService.createAuthSession(userId, authToken))
-            return AuthService.user(scope);
+            return AuthService.user();
           else
             return false;
         });
@@ -63,12 +60,9 @@ angular.module('hyenaCheckpointsApp')
        * Gets the user object of the currently logged in user
        * @return Promise
        */
-      user: function(scope) {
-        if(angular.isUndefined(scope))
-          scope = '';
-
+      user: function() {
         var userId = AuthService.userId();
-        return UserService.get(userId, scope);
+        return UserService.get(userId, 'groups');
       },
 
       userId: function() {
@@ -76,14 +70,6 @@ angular.module('hyenaCheckpointsApp')
           return $localStorage.authUser;
         else
           return false;
-      },
-
-      /**
-       * Returns the current JWT token
-       * @return string JWT token
-       */
-      authToken: function() {
-        return $localStorage.authToken;
       },
      
       /**

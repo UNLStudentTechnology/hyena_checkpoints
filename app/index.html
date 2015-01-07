@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hyena Platform - Apps</title>
+    <title>Checkpoints</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
@@ -69,9 +69,15 @@
                 <unl-list-item-user user='{{currentUser | json}}'></unl-list-item-user>
                 <div ng-show="currentUser">
                 <!-- Authenticated user options -->
-                <unl-list-item-header>Options</unl-list-item-header>
+                <unl-list-item-header label="Options"></unl-list-item-header>
                 <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logOutCurrentUser()"></a></unl-list-item-label>
                 <!-- End authenticated user options -->
+                <!-- List groups -->
+                <unl-list-item-header label="Groups"></unl-list-item-header>
+                <unl-list-item-label ng-attr-active="{{group.id==currentGroupId}}" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
+                    <a ng-click="go('/{{group.id}}', 'animate-slide-left'); closeMainDrawer()"><paper-ripple fit></paper-ripple></a>
+                </unl-list-item-label>
+                <!-- End list groups -->
                 </div>
             </unl-list-group>
         </div>
@@ -123,19 +129,20 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/factories/AppFirebase.js"></script>
-        <script src="scripts/controllers/application.js"></script>
         <script src="scripts/controllers/dashboard.js"></script>
+        <script src="scripts/controllers/checkpoint.js"></script>
+        <script src="scripts/controllers/application.js"></script>
+        <script src="scripts/controllers/checkpointSettings.js"></script>
+        <script src="scripts/services/CheckpointService.js"></script>
         <script src="scripts/services/UserService.js"></script>
         <script src="scripts/services/Session.js"></script>
         <script src="scripts/services/AuthService.js"></script>
         <script src="scripts/services/AuthInterceptor.js"></script>
         <script src="scripts/services/Notification.js"></script>
         <script src="scripts/services/GroupService.js"></script>
-        <script src="scripts/services/AppService.js"></script>
         <script src="scripts/filters/user.js"></script>
         <script src="scripts/filters/toarray.js"></script>
         <script src="scripts/directives/user.js"></script>
-        <script src="scripts/controllers/app.js"></script>
         <!-- endbuild -->
 </body>
 </html>

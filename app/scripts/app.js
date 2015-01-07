@@ -26,9 +26,17 @@ angular
         templateUrl: 'views/main.html',
         controller: 'DashboardCtrl'
       })
-      .when('/app/:appId', {
-        templateUrl: 'views/app.html',
-        controller: 'AppCtrl'
+      .when('/:groupId', {
+        templateUrl: 'views/main.html',
+        controller: 'DashboardCtrl'
+      })
+      .when('/:groupId/checkpoint/:checkpointId', {
+        templateUrl: 'views/checkpoint.html',
+        controller: 'CheckpointCtrl'
+      })
+      .when('/:groupId/checkpoint/:checkpointId/settings', {
+        templateUrl: 'views/checkpoint_settings.html',
+        controller: 'CheckpointSettingsCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -47,7 +55,6 @@ angular
   .constant('FBURL', 'https://amber-heat-9947.firebaseio.com/')
   .constant('APIKEY', 'MTZhYThmNDhiOTdhNzI2YmUyN2NkYWZk')
   .constant('APIPATH', 'http://st-studio.unl.edu/hyena_platform/public/api/1.0/')
-  .constant('PLATFORM_ROOT', 'http://st-studio.unl.edu/hyena_platform/public/')
   .constant('angularMomentConfig', {
     //timezone: 'America/Chicago'
   })
