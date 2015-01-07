@@ -18,7 +18,7 @@ angular.module('hyenaCheckpointsApp')
 	  	//End declare variables
 
 	  	//Get checkpoints for the active group
-	    var checkpoint = CheckpointService.get(groupId, ccheckpointId).$asObject();
+	    var checkpoint = CheckpointService.get(groupId, checkpointId).$asObject();
 	    checkpoint.$bindTo($scope, 'checkpoint');
 	    checkpoint.$watch(function() {
 		    $scope.checkpointTitle = checkpoint.title;
