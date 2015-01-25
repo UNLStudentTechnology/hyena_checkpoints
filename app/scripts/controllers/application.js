@@ -36,6 +36,7 @@ angular.module('hyenaCheckpointsApp')
     }
     else if(AuthService.check() && AppFirebase.getAuthRef().$getAuth() !== null) //Already authenticated, attempt to get existing session
     {
+      console.log('Firebase Auth Status', AppFirebase.getAuthRef().$getAuth());
       $scope.appLoaded = true;
       AuthService.user('groups').then(function(user) {
         $scope.currentUser = user.data;
@@ -70,11 +71,11 @@ angular.module('hyenaCheckpointsApp')
       AuthService.login();
     });
 
-    // AppFirebase.getAuthRef().$onAuth(function(authData) {
-    //   if (!authData) {
-    //     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-    //   }
-    // });
+    AppFirebase.getAuthRef().$onAuth(function(authData) {
+      if (!authData && $scope.currentUser) {
+        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+      }
+    });
 
     /**
      * Sets the current user on scope.
@@ -109,6 +110,13 @@ angular.module('hyenaCheckpointsApp')
      */
     $scope.closeMainDrawer = function() {
       document.querySelector('unl-layout').closeDrawer();
+    };
+
+    /**
+     * Forces the drawer to hide even on large screens
+     */
+    $scope.hideMainDrawer = function() {
+      document.querySelector('unl-layout').forceToggleDrawer();
     };
 
     /**

@@ -2,13 +2,15 @@
 	<unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
 	<a ng-click="go('/{{group}}', 'animate-slide-left')" title="Back to Checkpoints"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
   	<span flex class="align-center">{{checkpoint.title}}</span>
+  	<a ng-click="toggleKioskMode()" title="Enter Kiosk Mode"><unl-icon-button icon="fullscreen"></unl-icon-button></a>
   	<a ng-click="go('/{{group}}/checkpoint/{{checkpoint.$id}}/settings')" title="Settings"><unl-icon-button icon="settings"></unl-icon-button></a>
 </unl-toolbar>
 <!-- Check in Form -->
 <div class="content-container">
 	<form name="checkinUserForm" ng-submit="checkinUser()" novalidate>
 		<div horizontal layout>
-			<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="ncardInput" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
+			<label for="nuid" hidden>Enter your NUID</label>
+			<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="nuid" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
 			<button type="submit" ng-disabled="checkinUserForm.$invalid">Check In</button>
 		</div>
         <div ng-show="checkinUserForm.ncardInput.$dirty" ng-messages="checkinUserForm.ncardInput.$error" ng-messages-include="form-validation-messages" class="input-help color-error"></div>
@@ -16,11 +18,30 @@
 </div>
 <!-- End Check in Form -->
 <!-- Checkins -->
-<div class="content-container" flex>
-	<unl-empty-content ng-hide="checkins.length > 0" text="No checkins yet"></unl-empty-content>
-	<unl-list-group ng-show="checkins.length > 0">
-		<unl-list-item-header label="Past Checkins"></unl-list-item-header>
-		<unl-list-item-label user user-model="checkin.user" class="animate-fade-left" image="{{ checkin.user.profile_image }}" heading="{{ checkin.user.first_name ? checkin.user.first_name +' '+ checkin.user.last_name : checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkins | orderBy:'created_at':true"></unl-list-item-label>
-	</unl-list-group>
-</div>
+<unl-panel class="well" flex>
+	<div class="content-container">
+		<unl-empty-content ng-hide="checkins.length > 0" text="No checkins yet"></unl-empty-content>
+		<unl-list-group ng-show="checkins.length > 0">
+			<unl-list-item-header>{{checkins.length}} Past Checkins</unl-list-item-header>
+			<unl-list-item-label user user-model="checkin.user" class="animate-fade-left" image="{{ checkin.user.profile_image }}" heading="{{ checkin.user.first_name ? checkin.user.first_name +' '+ checkin.user.last_name : checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkins | orderBy:'created_at':true"></unl-list-item-label>
+		</unl-list-group>
+	</div>
+</unl-panel>
 <!-- End Checkins -->
+<unl-layout-kiosk ng-show="kioskMode">
+	<div tools>
+		<a ng-click="toggleKioskMode()" title="Leave Kiosk Mode"><unl-icon-button icon="fullscreen-exit"></unl-icon-button></a>
+	</div>
+	<div main>
+		<div class="icon-header">
+			<h2 class="align-center">Check In <span class="subhead">Enter your NUID below</span></h2>
+		</div>
+		<form name="checkinUserForm" ng-submit="checkinUser()" novalidate>
+			<div horizontal layout>
+				<label for="kiosk-nuid" hidden>Enter your NUID</label>
+				<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="kiosk-nuid" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
+				<button type="submit" ng-disabled="checkinUserForm.$invalid">Check In</button>
+			</div>
+		</form>
+	</div>
+</unl-layout-kiosk>

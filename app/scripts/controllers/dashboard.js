@@ -14,18 +14,16 @@ angular.module('hyenaCheckpointsApp')
     //Get the selected group from the route parameters and set it in the scope
     var groupId = $routeParams.groupId;
     $scope.groupId = $rootScope.currentGroupId = groupId;
-    
 
     //Check and see if the group exists in the Firebase, if not, add it.
     if(angular.isDefined(groupId))
       GroupService.existsOrAdd(groupId);
-
     
     //Load a list of checkpoints
   	$scope.checkpoints = null;
     $scope.checkpoints = CheckpointService.sync(groupId, 10).$asArray();
 	  //checkpoints.$bindTo($scope, 'checkpoints');
-    //console.log($scope.checkpoints);
+    console.log($scope.checkpoints);
 
     /**
      * Add a new checkpoint to the Firebase

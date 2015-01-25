@@ -195,6 +195,11 @@ Example:
                 */
                 toggleDrawer: function(){
                     this.isDrawerOpen = !this.isDrawerOpen;
+                },
+
+                forceToggleDrawer: function(){
+                    this.isDrawerOpen = !this.isDrawerOpen;
+                    this.hideDrawer = !this.hideDrawer;
                 }
             });
         }());

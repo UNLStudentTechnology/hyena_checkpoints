@@ -1,0 +1,16 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Created by Hayden Gascoigne
+-->
+
+<polymer-element name="unl-layout-kiosk" fit noscript>
+  <template>
+  	<div class="tools" horizontal end-justified layout>
+  		<content select="[tools]"></content>
+  	</div>
+  	<div class="kiosk-content" horizontal layout center center-justified>
+    	<content select="[main]"></content>
+    </div>
+  </template>
+</polymer-element>

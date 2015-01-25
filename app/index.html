@@ -26,10 +26,15 @@
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
     <!-- endbuild -->
 
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/unl-style/dist/unl-style.css" shim-shadowdom />
+    <!-- endbower -->
+
     <!-- UNL Components -->
-    <link rel="import" href="elements/unl-style/unl-style.html">
     <link rel="import" href="elements/unl-header/unl-header.html">
     <link rel="import" href="elements/unl-layout/unl-layout.html">
+    <link rel="import" href="elements/unl-layout-kiosk/unl-layout-kiosk.html">
+    <link rel="import" href="elements/unl-panel/unl-panel.html">
     <link rel="import" href="elements/unl-toolbar/unl-toolbar.html">
     <link rel="import" href="elements/unl-list-group/unl-list-group.html">
     <link rel="import" href="elements/unl-list-item/unl-list-item.html">
@@ -46,8 +51,6 @@
     <link rel="import" href="elements/paper-ripple/paper-ripple.html">
 
     <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
     <!-- endbuild -->
   </head>
   <body ng-controller="ApplicationCtrl" ng-show="appLoaded" unresolved>
@@ -69,11 +72,11 @@
                 <unl-list-item-user user='{{currentUser | json}}'></unl-list-item-user>
                 <div ng-show="currentUser">
                 <!-- Authenticated user options -->
-                <unl-list-item-header label="Options"></unl-list-item-header>
+                <unl-list-item-header>Options</unl-list-item-header>
                 <unl-list-item-label heading="Log out" link><a ng-href="#" ng-click="logOutCurrentUser()"></a></unl-list-item-label>
                 <!-- End authenticated user options -->
                 <!-- List groups -->
-                <unl-list-item-header label="Groups"></unl-list-item-header>
+                <unl-list-item-header>My Groups</unl-list-item-header>
                 <unl-list-item-label ng-attr-active="{{group.id==currentGroupId}}" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
                     <a ng-click="go('/{{group.id}}', 'animate-slide-left'); closeMainDrawer()"><paper-ripple fit></paper-ripple></a>
                 </unl-list-item-label>
@@ -81,8 +84,7 @@
                 </div>
             </unl-list-group>
         </div>
-        <div main>
-            <div ng-view="" ng-class="pageAnimationClass"></div>
+        <div main vertical layout ng-view="" ng-class="pageAnimationClass">
         </div>
     </unl-layout>
     <unl-toast text=""></unl-toast>

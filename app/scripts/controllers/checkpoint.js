@@ -16,21 +16,30 @@ angular.module('hyenaCheckpointsApp')
   	var groupId = $routeParams.groupId;
   	$scope.group = groupId;
     $scope.currentGroupId = groupId;
+    $scope.kioskMode = false;
   	//End declare variables
 
   	//Get checkpoints for the active group
     $scope.checkpoint = CheckpointService.get(groupId, checkpointId).$asObject();
     $scope.checkins = CheckpointService.checkins(groupId, checkpointId).$asArray();
 
-	/**
-	 * Checks in a user to a particular checkpoint
-	 * @return bool
-	 */
-	$scope.checkinUser = function() {
-		console.log('Checking in ID...', $scope.checkinNcard);
+    /**
+     * Toggles kiosk mode, an interface for direct customer use.
+     */
+    $scope.toggleKioskMode = function() {
+      $scope.hideMainDrawer();
+      $scope.kioskMode = !$scope.kioskMode;
+    };
 
-		//After submission, validate the NUID and return (if possible)
-		//the Blackboard Username associated with the NUID.
+  	/**
+  	 * Checks in a user to a particular checkpoint
+  	 * @return bool
+  	 */
+  	$scope.checkinUser = function() {
+  		console.log('Checking in ID...', $scope.checkinNcard);
+
+  		//After submission, validate the NUID and return (if possible)
+  		//the Blackboard Username associated with the NUID.
     	var validation = UserService.validate($scope.checkinNcard);
     	validation.then(function(user) {
     		var validatedUser = user.data.users_validated[0];
