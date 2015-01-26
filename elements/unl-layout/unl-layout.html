@@ -197,9 +197,14 @@ Example:
                     this.isDrawerOpen = !this.isDrawerOpen;
                 },
 
-                forceToggleDrawer: function(){
-                    this.isDrawerOpen = !this.isDrawerOpen;
-                    this.hideDrawer = !this.hideDrawer;
+                forceHideDrawer: function(){
+                    this.isDrawerOpen = false;
+                    this.hideDrawer = true;
+                },
+
+                forceShowDrawer: function(){
+                    //this.isDrawerOpen = true;
+                    this.hideDrawer = false;
                 }
             });
         }());

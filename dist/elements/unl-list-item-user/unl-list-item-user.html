@@ -8,7 +8,7 @@ Created by Hayden Gascoigne
   <template>
     <li class="unl-list-item">     
       <template if="{{user}}">
-        <div class="user-avatar"><img src="https://s3.amazonaws.com/unlqna/uploads/user_images/{{user.profile_image}}" alt="User Avatar" class="user-avatar-img"/></div>
+        <div class="user-avatar"><img src="{{user.profile_image}}" alt="User Avatar" class="user-avatar-img"/></div>
         <div class="user-detail">{{user.first_name}} {{user.last_name}}</div>
       </template>
       <template if="{{!user}}">
@@ -41,16 +41,16 @@ Created by Hayden Gascoigne
         user: {},
 
         userChanged: function() {
-          try{
             if(typeof this.user !== 'undefined' && this.user !== null)
             {
-              this.user = JSON.parse(this.user);
+              try{
+                this.user = JSON.parse(this.user);
+              }
+              catch(error)
+              {
+                //console.warn('unl-list-item-user error:', 'Not Valid JSON');
+              }
             }
-          }
-          catch(error)
-          {
-            console.warn('unl-list-item-user error:', 'Not Valid JSON');
-          }
         }
 
       });

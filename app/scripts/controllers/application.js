@@ -106,7 +106,7 @@ angular.module('hyenaCheckpointsApp')
     };
 
     /**
-     * Toggles the main layout drawer
+     * Closes the main layout drawer
      */
     $scope.closeMainDrawer = function() {
       document.querySelector('unl-layout').closeDrawer();
@@ -116,7 +116,14 @@ angular.module('hyenaCheckpointsApp')
      * Forces the drawer to hide even on large screens
      */
     $scope.hideMainDrawer = function() {
-      document.querySelector('unl-layout').forceToggleDrawer();
+      document.querySelector('unl-layout').forceHideDrawer();
+    };
+
+    /**
+     * Forces the drawer to show even on large screens
+     */
+    $scope.showMainDrawer = function() {
+      document.querySelector('unl-layout').forceShowDrawer();
     };
 
     /**

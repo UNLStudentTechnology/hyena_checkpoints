@@ -26,9 +26,14 @@ angular.module('hyenaCheckpointsApp')
     /**
      * Toggles kiosk mode, an interface for direct customer use.
      */
-    $scope.toggleKioskMode = function() {
+    $scope.showKioskMode = function() {
       $scope.hideMainDrawer();
-      $scope.kioskMode = !$scope.kioskMode;
+      $scope.kioskMode = true;
+    };
+
+    $scope.hideKioskMode = function() {
+      $scope.showMainDrawer();
+      $scope.kioskMode = false;
     };
 
   	/**

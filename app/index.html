@@ -26,10 +26,6 @@
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
     <!-- endbuild -->
 
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/unl-style/dist/unl-style.css" shim-shadowdom />
-    <!-- endbower -->
-
     <!-- UNL Components -->
     <link rel="import" href="elements/unl-header/unl-header.html">
     <link rel="import" href="elements/unl-layout/unl-layout.html">
@@ -51,6 +47,9 @@
     <link rel="import" href="elements/paper-ripple/paper-ripple.html">
 
     <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/unl-style/dist/unl-style.css" />
+    <!-- endbower -->
     <!-- endbuild -->
   </head>
   <body ng-controller="ApplicationCtrl" ng-show="appLoaded" unresolved>
@@ -111,7 +110,6 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -145,6 +143,7 @@
         <script src="scripts/filters/user.js"></script>
         <script src="scripts/filters/toarray.js"></script>
         <script src="scripts/directives/user.js"></script>
+        <script src="scripts/directives/selfvalidation.js"></script>
         <!-- endbuild -->
 </body>
 </html>

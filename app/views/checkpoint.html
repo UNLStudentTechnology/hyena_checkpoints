@@ -2,7 +2,7 @@
 	<unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
 	<a ng-click="go('/{{group}}', 'animate-slide-left')" title="Back to Checkpoints"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
   	<span flex class="align-center">{{checkpoint.title}}</span>
-  	<a ng-click="toggleKioskMode()" title="Enter Kiosk Mode"><unl-icon-button icon="fullscreen"></unl-icon-button></a>
+  	<a ng-click="showKioskMode()" title="Enter Kiosk Mode"><unl-icon-button icon="fullscreen"></unl-icon-button></a>
   	<a ng-click="go('/{{group}}/checkpoint/{{checkpoint.$id}}/settings')" title="Settings"><unl-icon-button icon="settings"></unl-icon-button></a>
 </unl-toolbar>
 <!-- Check in Form -->
@@ -10,38 +10,51 @@
 	<form name="checkinUserForm" ng-submit="checkinUser()" novalidate>
 		<div horizontal layout>
 			<label for="nuid" hidden>Enter your NUID</label>
-			<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="nuid" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
+			<input self-validation model="checkinNcard" type="text" field="nuid" placeholder="Enter your NUID" flex ten required="false">
 			<button type="submit" ng-disabled="checkinUserForm.$invalid">Check In</button>
 		</div>
-        <div ng-show="checkinUserForm.ncardInput.$dirty" ng-messages="checkinUserForm.ncardInput.$error" ng-messages-include="form-validation-messages" class="input-help color-error"></div>
 	</form>
 </div>
 <!-- End Check in Form -->
 <!-- Checkins -->
 <unl-panel class="well" flex>
 	<div class="content-container">
+		<label for="checkin-filter" hidden>Find Someone</label>
+		<div horizontal layout gutters>
+			<div flex>
+				<input name="checkin-filter" class="margin-bottom" ng-model="checkin_search.$" placeholder="Find someone..." >
+			</div>
+			<div>
+				<button type="button">Export</button>
+			</div>
+		</div>
 		<unl-empty-content ng-hide="checkins.length > 0" text="No checkins yet"></unl-empty-content>
 		<unl-list-group ng-show="checkins.length > 0">
 			<unl-list-item-header>{{checkins.length}} Past Checkins</unl-list-item-header>
-			<unl-list-item-label user user-model="checkin.user" class="animate-fade-left" image="{{ checkin.user.profile_image }}" heading="{{ checkin.user.first_name ? checkin.user.first_name +' '+ checkin.user.last_name : checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkins | orderBy:'created_at':true"></unl-list-item-label>
+			<unl-list-item-label user user-model="checkin.user" class="animate-fade-left" image="{{ checkin.user.profile_image }}" heading="{{ checkin.user.first_name ? checkin.user.first_name +' '+ checkin.user.last_name : checkin.user }}" label="{{ checkin.created_at | amDateFormat:'MMMM Do YYYY, h:mm A' }}" ng-repeat="checkin in checkins | orderBy:'created_at':true | filter:checkin_search"></unl-list-item-label>
 		</unl-list-group>
 	</div>
 </unl-panel>
 <!-- End Checkins -->
+<!-- Kiosk Mode -->
 <unl-layout-kiosk ng-show="kioskMode">
-	<div tools>
-		<a ng-click="toggleKioskMode()" title="Leave Kiosk Mode"><unl-icon-button icon="fullscreen-exit"></unl-icon-button></a>
+	<div header>
+		{{checkpoint.title}}
 	</div>
-	<div main>
+	<div tools>
+		<a ng-click="hideKioskMode()" title="Leave Kiosk Mode"><unl-icon-button icon="fullscreen-exit"></unl-icon-button></a>
+	</div>
+	<div content>
 		<div class="icon-header">
 			<h2 class="align-center">Check In <span class="subhead">Enter your NUID below</span></h2>
 		</div>
 		<form name="checkinUserForm" ng-submit="checkinUser()" novalidate>
 			<div horizontal layout>
 				<label for="kiosk-nuid" hidden>Enter your NUID</label>
-				<input required ng-model="checkinNcard" autocomplete="off" class="auto-focus ncard-input" type="text" name="kiosk-nuid" value="" placeholder="Enter your NUID" pattern="[0-9]*" flex ten>
+				<input self-validation required model="checkinNcard" type="text" field="kiosk-nuid" placeholder="Enter your NUID" flex ten>
 				<button type="submit" ng-disabled="checkinUserForm.$invalid">Check In</button>
 			</div>
 		</form>
 	</div>
 </unl-layout-kiosk>
+<!-- End Kiosk Mode -->

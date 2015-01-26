@@ -19,7 +19,8 @@ angular.module('hyenaCheckpointsApp')
 				return $firebase(CheckpointService.groupFirebaseRef(groupId).child(checkpointId));
 			},
 			sync: function sync(groupId, limit) {
-				return $firebase(CheckpointService.groupFirebaseRef(groupId).limit(limit));
+				limit = limit || 20;
+				return $firebase(CheckpointService.groupFirebaseRef(groupId).limitToFirst(limit));
 			},
 			add: function addCheckpoint(groupId, checkpoint) {
 				return $firebase(CheckpointService.groupFirebaseRef(groupId)).$push(checkpoint);
