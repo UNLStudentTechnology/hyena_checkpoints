@@ -92,7 +92,22 @@ angular.module('hyenaCheckpointsApp')
 				});
 
 				return deferred.promise;
-			}
+			},
+			/**
+		     * Returns a clean array to be exported to CSV
+		     * @return array Array of checkpoints
+		     */
+		   	exportCheckins: function exportCheckins(array) {
+		   		var exportArray = angular.copy(array);
+		   		console.log(exportArray);
+				for (var i = 0; i < exportArray.length; i++) {
+					delete exportArray[i].$id;
+					delete exportArray[i].$priority;
+					delete exportArray[i].checkpoint_id;
+					exportArray[i].user = exportArray[i].user.uni_auth;
+				}
+				return exportArray;
+		    }
 		};
 
 		return CheckpointService;

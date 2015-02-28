@@ -12,6 +12,8 @@ angular.module('hyenaCheckpointsApp')
   .controller('CheckpointCtrl', function ($scope, $rootScope, $stateParams, UserService, GroupService, CheckpointService, Notification) {
     //Declare Variables
     $scope.doingCheckin = false;
+    $scope.sortField = "created_at";
+    $scope.sortDirection = true;
   	//Get and set the current group ID
     var groupId = $stateParams.groupId;
     $scope.groupId = $rootScope.currentGroupId = groupId;
@@ -24,6 +26,16 @@ angular.module('hyenaCheckpointsApp')
 
     //Get checkins
     $scope.checkins = CheckpointService.checkins(checkpointId).$asArray();
+
+    //CSV Export Headers
+    $scope.csvHeaders = ['Check In Time', 'Blackboard Username'];
+
+    /**
+     * Changes the sort direction for the checkin list
+     */
+    $scope.toggleSort = function() {
+      $scope.sortDirection = !$scope.sortDirection;
+    };
 
   	/**
   	 * Checks in a user to a particular checkpoint
@@ -41,7 +53,7 @@ angular.module('hyenaCheckpointsApp')
     			processCheckin(validatedUser);
     		}, function(error) {
     			//Not part of group, check and see if the user has permission to check in. (non_member setting on checkpoint)
-	    		if($scope.checkpoint.non_members !== 1) //If members aren't allowed
+	    		if($scope.checkpoint.non_members != 1) //If members aren't allowed
 	    		{
 	    			$scope.checkinNcard = '';
             $scope.checkinForm.$setPristine();
@@ -51,10 +63,14 @@ angular.module('hyenaCheckpointsApp')
 		    	else
 		    	{
 		    		processCheckin(validatedUser);
-		    		// var addUserResponse = GroupService.usersAdd(groupId, [validatedUser]);
-		    		// addUserResponse.then(function(response) {
-		    		// 	console.log('User added to group.');
-		    		// });
+            //Add user to group
+            if(angular.isDefined($scope.checkpoint.add_to_group) && $scope.checkpoint.add_to_group == 1)
+            {
+  		    		var addUserResponse = GroupService.usersAdd(groupId, {users:[validatedUser]});
+  		    		addUserResponse.then(function(response) {
+  		    			console.log('User added to group.');
+  		    		});
+            }
 		    	}
     		});
     	}, function(error) {
@@ -100,5 +116,13 @@ angular.module('hyenaCheckpointsApp')
       $scope.checkinNcard = '';
       $scope.checkinForm.$setPristine();
     }
+
+    /**
+     * Returns a clean array to be exported to CSV
+     * @return array Array of checkins
+     */
+    $scope.getExportArray = function() {
+      return CheckpointService.exportCheckins($scope.checkins);
+    };
 
   });

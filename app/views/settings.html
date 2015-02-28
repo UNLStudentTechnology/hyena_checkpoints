@@ -12,9 +12,14 @@
 					<input self-validation type="text" model="checkpoint.title" field="checkpoint-title">
 				</div>
 			</unl-list-item-label>
-			<unl-list-item-label heading="Allow Non-Members" label="Should non-members be allowed to check in and be added to the group?">
+			<unl-list-item-label heading="Allow Non-Members" label="Should non-members be allowed to check in?">
 				<div class="tools">
 					<unl-toggle-button id="allow-non-members" value="{{checkpoint.non_members}}" bind-polymer></unl-toggle-button>
+				</div>
+			</unl-list-item-label>
+			<unl-list-item-label heading="Add Non-Members to Group" label="Should non-members be added to the group?">
+				<div class="tools">
+					<unl-toggle-button id="add-to-group" value="{{checkpoint.add_to_group}}" bind-polymer></unl-toggle-button>
 				</div>
 			</unl-list-item-label>
 		</unl-list-group>

@@ -19,7 +19,8 @@ angular
     'angularMoment',
     'hyenaAngular',
     'ngTagsInput',
-    'ngStorage'
+    'ngStorage',
+    'ngCsv'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
