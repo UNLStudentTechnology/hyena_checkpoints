@@ -1,37 +1,25 @@
 <unl-toolbar>
   <unl-drawer-toggle ng-click="toggleMainDrawer()"></unl-drawer-toggle>
-  <span flex class="align-center" ng-if="groupId">Checkpoints</span>
-  <span flex class="align-center" ng-if="!groupId">Groups</span>
+  <span flex class="align-center">Checkpoints</span>
+  <a ng-click="go('/{{groupId}}/checkpoint/new')" ng-show="groupId" title="Create New Checkpoint"><unl-icon-button icon="add"></unl-icon-button></a>
 </unl-toolbar>
+<unl-progress indeterminate ng-hide="checkpoints || !groupId" class="animate-fade-out"></unl-progress>
 <!-- Group List -->
 <div class="content-container" ng-hide="groupId">
   <unl-list-group>
-    <unl-list-item-label class="animate-fade-left" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link><a ng-href="/{{group.id}}"><paper-ripple fit></paper-ripple></a></unl-list-item-label>
+    <unl-list-item-label class="animate-fade-left" ng-repeat="group in currentUser.groups | orderBy:'title'" heading="{{group.title}}" link>
+      <a ng-href="/{{group.id}}"><paper-ripple fit></paper-ripple></a>
+    </unl-list-item-label>
   </unl-list-group>
 </div>
 <!-- End Group List -->
-<!-- Checkpoints -->
 <div class="content-container" ng-show="groupId">
-  <!-- Checkpoint List -->
-  <unl-empty-content ng-show="checkpoints.length == 0" text="No checkpoints yet"></unl-empty-content>
+  <unl-empty-content fit ng-hide="checkpoints.length > 0" text="No checkpoints Yet">
+    <span subhead>Add your first checkpoint by hitting <core-icon icon="add"></core-icon> above</span>
+  </unl-empty-content>
   <unl-list-group>
-    <unl-list-item-label class="animate-fade-left" ng-repeat="checkpoint in checkpoints | orderBy:'title' " heading="{{ checkpoint.title }}" link>
+    <unl-list-item-label class="animate-fade-left" ng-repeat="checkpoint in checkpoints | orderBy:'title'" heading="{{checkpoint.title}}" link>
       <a ng-click="go('/{{groupId}}/checkpoint/{{checkpoint.$id}}')"><paper-ripple fit></paper-ripple></a>
-      <div class="tools show-on-hover">
-        <unl-icon-button icon="delete" ng-click="confirmRemoveCheckpoint('{{checkpoint.$id}}')"></unl-icon-button>
-      </div>
     </unl-list-item-label>
-    <unl-list-item ng-show="groupId">
-      <form name="newCheckpointForm" ng-submit="addCheckpoint()" novalidate>
-        <div horizontal layout>
-          <input required is="core-input" type="text" placeholder="My Checkpoint Name" name="checkpointTitle" ng-model="checkpointTitle" flex ten>
-          <button type="submit" ng-disabled="newCheckpointForm.$invalid">Add</button>
-        </div>
-        <div ng-show="newCheckpointForm.checkpointTitle.$dirty" ng-messages="newCheckpointForm.checkpointTitle.$error" ng-messages-include="form-validation-messages" class="input-help color-error"></div>
-      </form>
-    </unl-list-item>
   </unl-list-group>
-  <!-- End Checkpoint List -->
 </div>
-<!-- End Checkpoints -->
-<div id="modal-checkpoint-delete" hidden ng-include src="'views/partials/modal-checkpoint-delete.html'"></div>

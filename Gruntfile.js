@@ -1,4 +1,4 @@
-// Generated on 2014-10-24 using generator-angular 0.9.8
+// Generated on 2015-02-16 using generator-hyena 0.10.0
 'use strict';
 
 // # Globbing
@@ -60,8 +60,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.app %>/elements/{,*/}*.{html,css}',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -134,7 +133,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: '<%= yeoman.dist %>'
+          base: ''
         }
       }
     },
@@ -182,7 +181,7 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git*'
+            '!<%= yeoman.dist %>/.git{,*/}*'
           ]
         }]
       },
@@ -252,6 +251,9 @@ module.exports = function (grunt) {
         blockReplacements: {
           css: function (block) {
             return '<link rel="stylesheet" href="' + block.dest + '" shim-shadowdom>';
+          },
+          elements: function (block) {
+            return '<link rel="import" href="' + block.dest + '">';
           }
         }
       }
@@ -357,18 +359,18 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*',
+            'fonts/{,*/}*.*'
           ]
+        }, {
+          expand: true, 
+          cwd: './bower_components/unl-components',
+          dest: '<%= yeoman.dist %>/elements/unl-components/',
+          src: ['**', '!**/node_modules/**'], 
         }, {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }, {
-          expand: true, 
-          cwd: './',
-          dest: '<%= yeoman.dist %>',
-          src: ['elements/**', '!**/node_modules/**', '!**/bower_components/**'], 
         }]
       },
       styles: {

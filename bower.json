@@ -2,34 +2,30 @@
   "name": "hyena-checkpoints",
   "version": "0.9.0",
   "dependencies": {
-    "angular": "~1.3.0",
-    "json3": "~3.3.1",
-    "es5-shim": "~3.1.0",
-    "angular-resource": "~1.3.0",
-    "angular-cookies": "~1.3.0",
-    "angular-sanitize": "~1.3.0",
-    "angular-animate": "~1.3.0",
-    "angular-touch": "~1.3.0",
-    "angular-route": "~1.3.0",
+    "angular": "^1.3.0",
+    "json3": "^3.3.0",
+    "es5-shim": "^4.0.0",
+    "angular-animate": "^1.3.0",
+    "angular-cookies": "^1.3.0",
+    "angular-resource": "^1.3.0",
+    "angular-sanitize": "^1.3.0",
+    "angular-touch": "^1.3.0",
     "firebase": "~2.1.1",
     "angularfire": "~0.9.0",
     "moment": "~2.8.3",
-    "core-elements": "Polymer/core-elements#~0.4.2",
     "webcomponentsjs": "~0.5.4",
     "angular-moment": "~0.8.2",
     "ngstorage": "~0.3.0",
     "angular-messages": "~1.3.8",
-    "unl-style": "~0.1.0-beta.1"
+    "ng-tags-input": "~2.1.1",
+    "unl-style": "~0.2.0",
+    "unl-components": "~0.2.0",
+    "hyena-angular": "~0.2.0",
+    "angular-ui-router": "~0.2.13"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
     "angular-scenario": "~1.2.0"
   },
-  "appPath": "app",
-  "resolutions": {
-    "angular": "~1.3.0",
-    "polymer": "~0.5.4",
-    "platform": "^0.4.0",
-    "core-component-page": "^0.5.0"
-  }
+  "appPath": "app"
 }

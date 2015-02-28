@@ -9,72 +9,59 @@
  * Controller of the hyenaCheckpointsApp
  */
 angular.module('hyenaCheckpointsApp')
-  .controller('CheckpointCtrl', function ($scope, $http, $routeParams, CheckpointService, UserService, GroupService, Notification, APIPATH) {
-  	//Declare variables
-  	var checkpointId = $routeParams.checkpointId;
-    $scope.checkpoint = $scope.checkins = null;
-  	var groupId = $routeParams.groupId;
-  	$scope.group = groupId;
-    $scope.currentGroupId = groupId;
-    $scope.kioskMode = false;
-  	//End declare variables
+  .controller('CheckpointCtrl', function ($scope, $rootScope, $stateParams, UserService, GroupService, CheckpointService, Notification) {
+    //Declare Variables
+    $scope.doingCheckin = false;
+  	//Get and set the current group ID
+    var groupId = $stateParams.groupId;
+    $scope.groupId = $rootScope.currentGroupId = groupId;
+    //Get checkpoint id
+    var checkpointId = $scope.checkpointId = $stateParams.checkpointId;
 
-  	//Get checkpoints for the active group
-    $scope.checkpoint = CheckpointService.get(groupId, checkpointId).$asObject();
-    $scope.checkins = CheckpointService.checkins(groupId, checkpointId).$asArray();
+    //Get checkpoint
+    var checkpoint = CheckpointService.get(checkpointId).$asObject();
+    checkpoint.$bindTo($scope, 'checkpoint');
 
-    /**
-     * Toggles kiosk mode, an interface for direct customer use.
-     */
-    $scope.showKioskMode = function() {
-      $scope.hideMainDrawer();
-      $scope.kioskMode = true;
-    };
-
-    $scope.hideKioskMode = function() {
-      $scope.showMainDrawer();
-      $scope.kioskMode = false;
-    };
+    //Get checkins
+    $scope.checkins = CheckpointService.checkins(checkpointId).$asArray();
 
   	/**
   	 * Checks in a user to a particular checkpoint
   	 * @return bool
   	 */
-  	$scope.checkinUser = function() {
-  		console.log('Checking in ID...', $scope.checkinNcard);
-
-  		//After submission, validate the NUID and return (if possible)
-  		//the Blackboard Username associated with the NUID.
-    	var validation = UserService.validate($scope.checkinNcard);
-    	validation.then(function(user) {
+  	$scope.checkInUser = function() {
+      $scope.doingCheckin = true;
+  		//Validate the NUID and return BB username
+    	UserService.validate($scope.checkinNcard).then(function(user) {
     		var validatedUser = user.data.users_validated[0];
 
     		//Check and see if the user is a part of the group
-	    	var hasUserResponse = GroupService.hasUser($scope.group, validatedUser);
-    		hasUserResponse.then(function(response) {
+	    	GroupService.hasUser(groupId, validatedUser).then(function(response) {
     			//Is part of group, check them in
     			processCheckin(validatedUser);
     		}, function(error) {
     			//Not part of group, check and see if the user has permission to check in. (non_member setting on checkpoint)
-	    		if(!$scope.checkpoint.non_members) //If members aren't allowed
+	    		if($scope.checkpoint.non_members !== 1) //If members aren't allowed
 	    		{
 	    			$scope.checkinNcard = '';
-            $scope.checkinUserForm.$setPristine();
-		    		Notification.show('Sorry! You are not a member of this group.', 'error');
+            $scope.checkinForm.$setPristine();
+            $scope.doingCheckin = false;
+            Notification.show('Sorry! You are not a member of this group.', 'error');
 		    	}
 		    	else
 		    	{
 		    		processCheckin(validatedUser);
-		    		var addUserResponse = GroupService.addUser($scope.group, validatedUser);
-		    		addUserResponse.then(function(response) {
-		    			console.log('User added to group.');
-		    		});
+		    		// var addUserResponse = GroupService.usersAdd(groupId, [validatedUser]);
+		    		// addUserResponse.then(function(response) {
+		    		// 	console.log('User added to group.');
+		    		// });
 		    	}
     		});
     	}, function(error) {
     		//Unable to validate, log the error
         $scope.checkinNcard = '';
-        $scope.checkinUserForm.$setPristine();
+        $scope.checkinForm.$setPristine();
+        $scope.doingCheckin = false;
     		console.log(error);
     		Notification.show(error.data, 'error');
     	});
@@ -86,24 +73,32 @@ angular.module('hyenaCheckpointsApp')
      * @return null
      */
     function processCheckin(validatedUser) {
-    	//Was valid, create a new checkin
-    	var checkin = {
-    		user 		: validatedUser,
-    		created_at	: moment().format()
-    	};
 
-    	//Do the checkin
-    	var checkinPromise = CheckpointService.checkin($scope.group, $scope.checkpoint.$id, checkin);
-    	checkinPromise.then(function(response) {
-        //console.log('Checkin Response', response);
-    		Notification.show('Thanks! You have been checked in!', 'success');
-    	}, function(error) {
-    		//Unable to validate, log the error
-    		console.log('Checkin error', error);
-    		Notification.show('Sorry! You are already checked in!', 'error');
-    	});
+      CheckpointService.check(checkpointId, validatedUser).then(function(response) {
+        //Only check in if they're not already in
+        if(!response)
+        {
+          //Do the checkin
+          CheckpointService.checkIn(checkpointId, validatedUser).then(function(response) {
+            //console.log('Checkin Response', response);
+            Notification.show('Thanks! You have been checked in!', 'success');
+          }, function(error) {
+            Notification.show('Sorry! There was an error checking you in.', 'error');
+          });
+        }
+        else
+        {
+          Notification.show('Sorry! You are already checked in.', 'error');
+        }
+      }, function(error) {
+        console.log('Check() Error', error);
+        Notification.show('Sorry! There was an error checking you in.', 'error');
+      });
+
+      //Reset form
+      $scope.doingCheckin = false;
       $scope.checkinNcard = '';
-      $scope.checkinUserForm.$setPristine();
+      $scope.checkinForm.$setPristine();
     }
 
   });
