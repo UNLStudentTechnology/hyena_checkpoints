@@ -5,15 +5,17 @@
 	<a ng-click="go('/{{groupId}}/checkpoint/{{checkpointId}}')" title="Leave Kiosk Mode"><unl-icon-button icon="fullscreen-exit"></unl-icon-button></a>
 </div>
 <div content>
-	<div class="icon-header">
-		<h2 class="align-center">Check In <span class="subhead">Enter your NUID below</span></h2>
-	</div>
-	<unl-progress indeterminate class="margin-y animate-fade" ng-show="doingCheckin"></unl-progress>
-	<form name="checkinForm" ng-submit="checkInUser()" novalidate>
-		<div horizontal layout>
-			<label for="kiosk-nuid" hidden>Enter your NUID</label>
-			<input self-validation required model="checkinNcard" type="text" pattern="[0-9]*" field="kiosk-nuid" placeholder="Enter your NUID" flex start>
-			<button type="submit" ng-disabled="checkinForm.$invalid" input end>Check In</button>
+	<div class="content-container">
+		<div class="icon-header">
+			<h2 class="align-center">Check In <span class="subhead">Enter your NUID below</span></h2>
 		</div>
-	</form>
+		<unl-progress indeterminate class="margin-y animate-fade" ng-show="doingCheckin"></unl-progress>
+		<form name="checkinForm" ng-submit="checkInUser()" novalidate>
+			<div horizontal layout>
+				<label for="kiosk-nuid" hidden>Enter your NUID</label>
+				<input self-validation required model="checkinNcard" type="text" pattern="[0-9]*" field="kiosk-nuid" placeholder="Enter your NUID" flex start>
+				<button type="submit" ng-disabled="checkinForm.$invalid" input end>Check In</button>
+			</div>
+		</form>
+	</div>
 </div>

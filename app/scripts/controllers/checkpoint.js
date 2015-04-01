@@ -79,7 +79,7 @@ angular.module('hyenaCheckpointsApp')
         $scope.checkinForm.$setPristine();
         $scope.doingCheckin = false;
     		console.log(error);
-    		Notification.show(error.data, 'error');
+    		Notification.show(error.data.message, 'error');
     	});
     };
 

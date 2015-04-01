@@ -6,12 +6,11 @@
 	<!-- checkpoint Settings -->
 	<form name="newCheckpointForm" ng-submit="createCheckpoint()">
 		<unl-list-group>
-			<unl-list-item-header>General</unl-list-item-header>
-			<unl-list-item-label heading="Title">
+			<unl-list-item-details heading="Title">
 				<div class="tools">
 					<input required type="text" name="checkpoint-title" ng-model="checkpoint.title">
 				</div>
-			</unl-list-item-label>
+			</unl-list-item-details>
 		</unl-list-group>
 		<button type="submit" ng-disabled="newCheckpointForm.$invalid">Create Checkpoint</button>
 	</form>
