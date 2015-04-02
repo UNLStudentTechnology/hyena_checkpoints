@@ -13,7 +13,7 @@
 		<form name="checkinForm" ng-submit="checkInUser()" novalidate>
 			<div horizontal layout>
 				<label for="kiosk-nuid" hidden>Enter your NUID</label>
-				<input self-validation required model="checkinNcard" type="text" pattern="[0-9]*" field="kiosk-nuid" placeholder="Enter your NUID" flex start>
+				<input self-validation required model="checkinNcard" type="password" pattern="[0-9]*" field="kiosk-nuid" placeholder="Enter your NUID" flex start>
 				<button type="submit" ng-disabled="checkinForm.$invalid" input end>Check In</button>
 			</div>
 		</form>
