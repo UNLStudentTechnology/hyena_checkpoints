@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-controller="ApplicationCtrl" unresolved>
+  <body ng-controller="ApplicationCtrl" unresolved ng-show="appLoaded">
     <unl-modal id="unl-modal" type="takeover"></unl-modal>
     <!-- Login Modal Content -->
     <div id="modal-content-login" ng-include="" src="'views/partials/modal-login.html'" onload="showLoginWindow()"></div>
