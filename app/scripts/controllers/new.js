@@ -18,7 +18,8 @@ angular.module('hyenaCheckpointsApp')
     $scope.checkpoint = {
     	created_at: moment().format(),
         group_id: parseInt(groupId),
-        non_members: true
+        non_members: 1,
+        add_to_group: 0
     };
 
     /**

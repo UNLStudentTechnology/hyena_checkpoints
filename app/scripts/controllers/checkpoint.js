@@ -28,7 +28,7 @@ angular.module('hyenaCheckpointsApp')
     $scope.checkins = CheckpointService.checkins(checkpointId).$asArray();
 
     //CSV Export Headers
-    $scope.csvHeaders = ['Check In Time', 'Blackboard Username'];
+    $scope.csvHeaders = ['Check In Time', 'First Name', 'Last Name', 'Blackboard Username', 'Year', 'Major', 'College'];
 
     /**
      * Changes the sort direction for the checkin list

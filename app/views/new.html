@@ -11,6 +11,16 @@
 					<input required type="text" name="checkpoint-title" ng-model="checkpoint.title">
 				</div>
 			</unl-list-item-details>
+			<unl-list-item-details heading="Non-Member Check In" details="Should non-members be allowed to check in?">
+				<div class="tools">
+					<unl-toggle-button id="allow-non-members" value="{{checkpoint.non_members}}" bind-polymer></unl-toggle-button>
+				</div>
+			</unl-list-item-details>
+			<unl-list-item-details heading="Add Non-Members to Group" details="Should non-members be added to the group?">
+				<div class="tools">
+					<unl-toggle-button id="add-to-group" value="{{checkpoint.add_to_group}}" bind-polymer></unl-toggle-button>
+				</div>
+			</unl-list-item-details>
 		</unl-list-group>
 		<button type="submit" ng-disabled="newCheckpointForm.$invalid">Create Checkpoint</button>
 	</form>

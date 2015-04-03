@@ -72,6 +72,11 @@ angular.module('hyenaCheckpointsApp')
 				//Push new checkin
 				return $firebase(checkpointRef.child('/checkins')).$push(checkin);
 			},
+			/**
+			 * Returns a list of checkins for a particular checkpoint
+			 * @param  string checkpointId
+			 * @return Promise
+			 */
 			checkins: function getCheckins(checkpointId) {
 				return $firebase(checkpointRef.child('/checkins').orderByChild("checkpoint_id").equalTo(checkpointId));
 			},
@@ -104,7 +109,13 @@ angular.module('hyenaCheckpointsApp')
 					delete exportArray[i].$id;
 					delete exportArray[i].$priority;
 					delete exportArray[i].checkpoint_id;
-					exportArray[i].user = exportArray[i].user.uni_auth;
+					exportArray[i].first_name 	= exportArray[i].user.first_name;
+					exportArray[i].last_name 	= exportArray[i].user.last_name;
+					exportArray[i].uni_auth 	= exportArray[i].user.uni_auth;
+					exportArray[i].uni_year 	= exportArray[i].user.uni_year;
+					exportArray[i].uni_major 	= exportArray[i].user.uni_major;
+					exportArray[i].uni_college 	= exportArray[i].user.uni_college;
+					delete exportArray[i].user;
 				}
 				return exportArray;
 		    }
